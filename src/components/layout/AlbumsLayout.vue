@@ -1,6 +1,7 @@
 <template>
   <div>
     <PopAlbumLayout></PopAlbumLayout>
+    <PopPhotoLayout></PopPhotoLayout>
     <div class="container">
       <el-row class="row-bg" :gutter="20">
         <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
@@ -35,17 +36,19 @@
 <script>
 import AlbumCard from "../AlbumCard.vue";
 import PopAlbumLayout from "./PopAlbumLayout.vue";
+import PopPhotoLayout from "./PopPhotoLayout.vue";
 
 export default {
   data() {
     return {
-      show:false,
+      show: false,
       currentDate: new Date()
     };
   },
   components: {
     AlbumCard,
-    PopAlbumLayout
+    PopAlbumLayout,
+    PopPhotoLayout
   }
 };
 </script>

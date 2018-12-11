@@ -1,7 +1,7 @@
 <template>
   <el-card :body-style="{ padding: '0px'}">
-    <div>
-      <div class="photo_box">
+    <div >
+      <div class="photo_box" @click="setShowPhoto">
         <img src="http://t2.hddhhn.com/uploads/tu/201610/198/hkgip2b102z.jpg" class="photo">
       </div>
       <div class="text_content">
@@ -13,6 +13,25 @@
   </el-card>
 </template>
  
+<script>
+import { mapState, mapGetters, mapActions } from "vuex";
+
+export default {
+  data() {
+    return {
+    };
+  },
+  computed: mapGetters([
+    // 需要用的数据
+    "showPhoto"
+  ]),
+  methods: mapActions([
+    // 需要动用的外部方法
+    "setShowPhoto",
+  ])
+  
+};
+</script>
 <style scoped>
 .time {
   font-size: 13px;
@@ -65,19 +84,3 @@
   font-weight: 600;
 }
 </style>
-
-<script>
-export default {
-  data() {
-    return {
-      currentDate: new Date()
-    };
-  },
-  methods: {
-    openPopPhotoLayout: function() {
-      this.styleObject.display = "";
-      console.log(this);
-    }
-  }
-};
-</script>

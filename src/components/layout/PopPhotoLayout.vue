@@ -1,12 +1,12 @@
 <template>
-  <div id="app" class="container" v-bind:style="styleObject">
+  <div id="app" class="container" v-show="showPhoto">
     <div style="display: flex; justify-content:center ">
       <img
         style="height: 100%"
         src="https://www.halfbakedharvest.com/wp-content/uploads/2015/12/Gingerbread-Latte-with-Salted-Caramel-Sugar-VIDEO-4.jpg"
       >
       <img
-        @click="closePopPhotoLayout"
+        @click="setShowPhoto"
         src="/src/assets/img/close.png"
         style="width: 40px;height: 40px;position: relative;left: 50px;top: 75px;"
       >
@@ -23,18 +23,23 @@
 </template>
 
 <script>
+import {mapState,mapGetters,mapActions} from 'vuex'
+
 export default {
   data() {
     return{
-      styleObject: {
-      display: "",
-    }}
+      }
   },
-  methods: {
-    closePopPhotoLayout: function(event) {
-      this.styleObject.display='none';
-    }
-  }
+  computed:mapGetters([
+    // 需要用的数据
+      'showAlbum',
+      'showPhoto'
+  ]),
+  methods:mapActions([
+    // 需要动用的外部方法
+      'setShowPhoto',
+      'setShowAlbum',
+  ]),
 };
 </script>
 

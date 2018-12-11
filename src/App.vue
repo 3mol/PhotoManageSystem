@@ -8,12 +8,14 @@
       </keep-alive>
     </div>
     <Footer></Footer>
+    <button @click="setShowPhoto"> 显示照片？{{showPhoto}}</button>
+    <button @click="setShowAlbum"> 显示相册？{{showAlbum}}</button>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from "vuex";
 
-import ImageCard from "./components/ImageCard.vue";
 import Nav from "./components/Nav.vue";
 import Search from "./components/Search.vue";
 import Classify from "./components/Classify.vue";
@@ -26,6 +28,17 @@ export default {
       msg: "欢迎来到"
     };
   },
+  methods: {},
+  computed: mapGetters([
+    // 需要用的数据
+    "showAlbum",
+    "showPhoto"
+  ]),
+  methods: mapActions([
+    // 需要动用的外部方法
+    "setShowPhoto",
+    "setShowAlbum"
+  ]),
   components: {
     Nav,
     Search,
@@ -36,9 +49,7 @@ export default {
 </script>
 
 <style >
-
-body{
+body {
   margin: 0;
 }
-
 </style>

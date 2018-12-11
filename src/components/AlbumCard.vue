@@ -1,7 +1,7 @@
 <template>
-  <div >
-    <div class="photo_box" >
-      <img @click="openPopPhotoLayout()" class="photo" src="http://t2.hddhhn.com/uploads/tu/201610/198/hkgip2b102z.jpg">
+  <div>
+    <div class="photo_box">
+      <img class="photo" src="http://t2.hddhhn.com/uploads/tu/201610/198/hkgip2b102z.jpg"  @click="setShowAlbum"> 
     </div>
     <div style="position:relative;width:100%">
       <div class="text_content">
@@ -14,13 +14,22 @@
 </template>
  
 <script>
+import { mapState, mapGetters, mapActions } from "vuex";
+
 export default {
   data() {
-    return {
-     
-    };
+    return {};
   },
-
+  computed: mapGetters([
+    // 需要用的数据
+    "showAlbum",
+    "showPhoto"
+  ]),
+  methods: mapActions([
+    // 需要动用的外部方法
+    "setShowPhoto",
+    "setShowAlbum"
+  ])
 };
 </script>
 

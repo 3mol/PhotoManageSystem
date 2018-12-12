@@ -1,6 +1,7 @@
 # element-demo
 
-> A Vue.js project
+> This is my personal project for homework.
+> Useing Vue and Vuex develop a web site about system of photo for convenience a company to browse and modify themselves photos or albums;
 
 ## Build Setup
 
@@ -15,4 +16,6 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## warn
+> this project has a sea of bugs, so U better don't download or copy the source code.
+

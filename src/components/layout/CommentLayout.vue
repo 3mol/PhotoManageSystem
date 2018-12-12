@@ -14,25 +14,14 @@
       </div>
       <div class="photo_desc">This thing in future will be a lot.</div>
       <div class="comments" style="overflow:auto">
-        <div class="comment_user_item">
+        <div class="comment_user_item" v-for="item in 6" :key="item">
           <div class="user_img">
-            <img src="/src/assets/img/dz1.png" alt height="40" width="40">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544634253339&di=bb79e3a83e0153119719b691f793f0ce&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3D97eab9fad139b6004d9b07b3dc60191c%2Fb21c8701a18b87d6a55b1106030828381f30fd8a.jpg" alt height="40" width="40">
           </div>
           <div class="comment_content">
             <label class="comment_user">路人甲</label>
             <label class="date">12月12日 15点32分</label>
             <label class="content">說了666</label>
-          </div>
-        </div>
-
-        <div class="comment_user_item">
-          <div class="user_img">
-            <img src="/src/assets/img/dz1.png" alt height="40" width="40">
-          </div>
-          <div class="comment_content">
-            <label class="comment_user">路人甲</label>
-            <label class="date">12月12日 15点32分</label>
-            <label class="content">說了666說了666vvv說了666s</label>
           </div>
         </div>
 

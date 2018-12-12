@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="photo_box" @click="setShowPhoto">
-      <img class="photo" v-bind:src="photo.photoURL">
+      <img class="photo"  :src="photo.photoURL">
     </div>
     <div style="position:relative;width:100%">
       <div class="text_content">
         <div class="photo_name">{{photo.photoName}}</div>
-        <div class="photo_date">12-12 19:29</div>
+        <div class="photo_date">{{photo.photoCreatetime}}</div>
       </div>
     </div>
   </div>
@@ -17,8 +17,7 @@ import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
-    photo: Object,
-    required: true
+    photo: Object
   },
   data() {
     return {};

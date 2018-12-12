@@ -62,16 +62,19 @@ export default {
       return this.$store.dispatch("some/nested/module/setShowAlbum", val);
     },
     nextPhotoIndex() {
-      this.photoIndex += 1;
+      if (this.photoIndex++ >= 2) this.photoIndex = 0;
     },
     prePhotoIndex() {
-      this.photoIndex -= 1;
+      if (this.photoIndex-- <= 0) this.photoIndex = 2;
     }
   }
 };
 </script>
 
 <style scoped>
+img:hover{
+cursor: pointer;
+}
 .fade-enter-active {
   animation: bounce-in 0.5s;
 }

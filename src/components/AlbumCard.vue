@@ -1,16 +1,4 @@
 <template>
-  <!-- <div>
-    <div class="photo_box">
-      <img class="photo" src="http://t2.hddhhn.com/uploads/tu/201610/198/hkgip2b102z.jpg"  @click="setShowAlbum"> 
-    </div>
-    <div style="position:relative;width:100%">
-      <div class="text_content">
-        <label class="pdl10 name">相册名字</label>
-        <br>
-        <label class="pdl10 desc">简单描述</label>
-      </div>
-    </div>
-  </div> -->
   <div class="container" >
         <!-- <i style="float:left;font-size:60px;color: rgb(145, 201, 246);" class="el-icon-picture"></i> -->
         <div style="float:left;margin-left:20px">
@@ -24,7 +12,7 @@
             <img
               class="photo"
               width="100%"
-              src="https://www.baidu.com/img/baidu_jgylogo3.gif" @click.stop="setShowPhoto"
+              src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1544622391&di=0a5dc5512bd27ebf8d0235224d119f9b&src=http://imgsrc.baidu.com/imgad/pic/item/b7003af33a87e950782ec0421b385343fbf2b4e6.jpg" @click.stop="setShowPhoto"
             >
           </el-col>
         </el-row>

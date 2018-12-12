@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <div class="photo_box">
       <img class="photo" src="http://t2.hddhhn.com/uploads/tu/201610/198/hkgip2b102z.jpg"  @click="setShowAlbum"> 
     </div>
@@ -10,7 +10,25 @@
         <label class="pdl10 desc">简单描述</label>
       </div>
     </div>
-  </div>
+  </div> -->
+  <div class="container" >
+        <!-- <i style="float:left;font-size:60px;color: rgb(145, 201, 246);" class="el-icon-picture"></i> -->
+        <div style="float:left;margin-left:20px">
+          <div class="album_name"  @click="setShowAlbum">- 相册名字</div>
+          <div class="album_time">时间</div>
+          <div class="album_desc">详情</div>
+        </div>
+        <div style="clear:both"></div>
+        <el-row class="row-bg mgt10" :gutter="20">
+          <el-col :xs="12" :sm="12" :md="4" :lg="4" :xl="4" v-for="key in 6" v-bind:key="key">
+            <img
+              class="photo"
+              width="100%"
+              src="https://www.baidu.com/img/baidu_jgylogo3.gif" @click.stop="setShowPhoto"
+            >
+          </el-col>
+        </el-row>
+      </div>
 </template>
  
 <script>
@@ -34,7 +52,38 @@ export default {
 </script>
 
 <style scoped>
-img :hover {
+.container {
+  background-color: white;
+  margin-top: 20px;
+  border: 1px #eaeaea solid;
+  padding: 20px 50px;
+  border-radius: 4px;
+  box-shadow: #eaeaea 1px 1px 1px;
+}
+.photo {
+  display: block;
+  height: 100%;
+}
+.photo:hover{
+  cursor: pointer;
+}
+.album_name {
+  font-size: 20px;
+  color: rgb(88, 73, 58);
+}.album_name:hover {
+  cursor: pointer;
+  color: rgb(191, 156, 121);
+}
+.album_time {
+  font-size: 12px;
+  color: rgb(137, 137, 137);
+}
+
+.album_desc {
+  color: rgb(137, 137, 137);
+  font-size: 12px;
+}
+/* img :hover {
   cursor: pointer;
 }
 .photo {
@@ -87,5 +136,5 @@ img :hover {
 
 .clearfix:after {
   clear: both;
-}
+} */
 </style>

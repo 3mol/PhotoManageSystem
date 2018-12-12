@@ -61,7 +61,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .btn_close {
   font-size: 18pt;
   float: right;

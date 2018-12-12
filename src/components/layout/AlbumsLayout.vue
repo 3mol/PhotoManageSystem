@@ -1,34 +1,14 @@
 <template>
-  <div>
+  <div style="margin-top:40px;">
     <PopAlbumLayout></PopAlbumLayout>
     <PopPhotoLayout></PopPhotoLayout>
-    <div class="container">
-      <el-row class="row-bg" :gutter="20">
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
-          <AlbumCard></AlbumCard>
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
-          <AlbumCard></AlbumCard>
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
-          <AlbumCard></AlbumCard>
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
-          <AlbumCard></AlbumCard>
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
-          <AlbumCard></AlbumCard>
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
-          <AlbumCard></AlbumCard>
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4">
-          <AlbumCard></AlbumCard>
-        </el-col>
-      </el-row>
-      <div class="mgt30" style="text-align: center">
-        <el-button round style="padding:10px 100px;">查看更多</el-button>
-      </div>
+    <div class="title_border">
+      <span style="font-size:24px;">Albums</span>
+      <i class="el-icon-arrow-down"></i>
+      <AlbumCard  v-for="key in 6" v-bind:key="key"></AlbumCard>
+    </div>
+    <div class="mgt30" style="text-align: center">
+      <el-button round style="padding:10px 100px;">查看更多</el-button>
     </div>
   </div>
 </template>
@@ -52,13 +32,23 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .el-col {
   margin-bottom: 20px;
 }
-.container {
+.title_border {
+  padding: 20px 0;
   margin: 0 auto;
   width: 80%;
+}
+
+.container {
+  background-color: white;
+  margin-top: 20px;
+  border: 1px #eaeaea solid;
+  padding: 20px 50px;
+  border-radius: 4px;
+  box-shadow: #eaeaea 1px 1px 1px;
 }
 .photo {
   display: block;
@@ -76,5 +66,18 @@ export default {
   height: 50px;
   bottom: 0;
   background: rgba(255, 255, 255, 0.6);
+}
+.album_name {
+  font-size: 20px;
+  color: rgb(88, 73, 58);
+}
+.album_time {
+  font-size: 12px;
+  color: rgb(137, 137, 137);
+}
+
+.album_desc {
+  color: rgb(137, 137, 137);
+  font-size: 12px;
 }
 </style>

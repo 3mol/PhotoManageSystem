@@ -1,51 +1,96 @@
 <template>
-  <div id="app" class="container" v-show="showPhoto">
-    <div style="display: flex; justify-content:center ">
-      <img
-        style="height: 100%"
-        src="https://www.halfbakedharvest.com/wp-content/uploads/2015/12/Gingerbread-Latte-with-Salted-Caramel-Sugar-VIDEO-4.jpg"
-      >
-      <img
-        @click="setShowPhoto"
-        src="/src/assets/img/close.png"
-        style="width: 40px;height: 40px;position: relative;left: 50px;top: 75px;"
-      >
-      <img
-        src="/src/assets/img/right.png"
-        style="width: 40px;height: 40px;position: fixed;right: 50px;top: 50vh;"
-      >
-      <img
-        src="/src/assets/img/left.png"
-        style="width: 40px;height: 40px;position: fixed;left: 50px;top: 50vh;"
-      >
+  <transition name="fade">
+    <div>
+      <div id="app" class="container" v-show="showPhoto">
+        <div style="display: flex; justify-content:center; height:100vh; align-items: center;">
+          <img style="height: 70%;" v-bind:src="photos[photoIndex]">
+        </div>
+        <img
+          @click="setShowPhoto"
+          src="/src/assets/img/close.png"
+          style="width: 40px;height: 40px;position: absolute;right: 50px;top: 75px;"
+        >
+        <img
+          @click="nextPhotoIndex"
+          src="/src/assets/img/right.png"
+          style="width: 40px;height: 40px;position: absolute;right: 50px;top: 50vh;"
+        >
+        <img
+          @click="prePhotoIndex"
+          src="/src/assets/img/left.png"
+          style="width: 40px;height: 40px;position: absolute;left: 50px;top: 50vh;"
+        >
+        <div style="background:#fff">缩略图等等的</div>
+      </div>
+      <CommentLayout v-show="showPhoto"></CommentLayout>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
-import {mapState,mapGetters,mapActions} from 'vuex'
-
+import { mapState, mapGetters, mapActions } from "vuex";
+import CommentLayout from "./CommentLayout.vue";
 export default {
   data() {
-    return{
-      }
+    return {
+      photoIndex: 0,
+      photos: [
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544549505750&di=ef4aaf34ab4422242c4cf8481660bdf3&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0134e15850ede3a8012060c8f505f1.jpg",
+        "https://goss2.vcg.com/creative/vcg/800/version23/VCG21408969635.jpg",
+        "https://goss4.vcg.com/creative/vcg/800/version23/VCG41173756925.jpg"
+      ]
+    };
   },
-  computed:mapGetters([
+  components: {
+    CommentLayout
+  },
+  computed: mapGetters([
     // 需要用的数据
-      'showAlbum',
-      'showPhoto'
+    "showAlbum",
+    "showPhoto"
   ]),
-  methods:mapActions([
-    // 需要动用的外部方法
-      'setShowPhoto',
-      'setShowAlbum',
-  ]),
+  // methods: mapActions([
+  //   // 需要动用的外部方法
+  //   "setShowPhoto",
+  //   "setShowAlbum",
+  // ]),
+  methods: {
+    setShowPhoto(val) {
+      return this.$store.dispatch("setShowPhoto", val);
+    },
+    setShowAlbum(val) {
+      return this.$store.dispatch("some/nested/module/setShowAlbum", val);
+    },
+    nextPhotoIndex() {
+      this.photoIndex += 1;
+    },
+    prePhotoIndex() {
+      this.photoIndex -= 1;
+    }
+  }
 };
 </script>
 
 <style scoped>
+.fade-enter-active {
+  animation: bounce-in 0.5s;
+}
+.fade-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .container {
-  width: 100vw;
+  width: 80vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.85);
   position: fixed;

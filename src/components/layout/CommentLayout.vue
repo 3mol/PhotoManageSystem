@@ -1,0 +1,142 @@
+<template>
+  <div class="comment_layout">
+    <div class="photo_info">
+      <div>
+        <div>
+          <div>
+            <label class="photo_name">建筑</label>
+            <label class="belong_album">来自: a相册</label>
+          </div>
+          <div>
+            <label class="date">12月11日 18:54</label>
+          </div>
+        </div>
+      </div>
+      <div class="photo_desc">This thing in future will be a lot.</div>
+      <div class="comments" style="overflow:auto">
+        <div class="comment_user_item">
+          <div class="user_img">
+            <img src="/src/assets/img/dz1.png" alt height="40" width="40">
+          </div>
+          <div class="comment_content">
+            <label class="comment_user">路人甲</label>
+            <label class="date">12月12日 15点32分</label>
+            <label class="content">說了666</label>
+          </div>
+        </div>
+
+        <div class="comment_user_item">
+          <div class="user_img">
+            <img src="/src/assets/img/dz1.png" alt height="40" width="40">
+          </div>
+          <div class="comment_content">
+            <label class="comment_user">路人甲</label>
+            <label class="date">12月12日 15点32分</label>
+            <label class="content">說了666說了666vvv說了666s</label>
+          </div>
+        </div>
+
+        <div class="comment_user_item">
+          <div class="user_img">
+            <img src="/src/assets/img/dz1.png" alt height="40" width="40">
+          </div>
+          <div class="comment_content">
+            <label class="comment_user">路人甲</label>
+            <label class="date">12月12日 15点32分</label>
+            <label class="content">說了666</label>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+
+    <div>
+      <div>
+        <img src="/src/assets/img/dz1.png" alt="点赞" width="24" height="24">
+      </div>
+      <el-input v-model="input" placeholder="我現對這個圖片評論"></el-input>
+      <el-button type="primary" style="margin-top:10px; float:right">express</el-button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ""
+    };
+  }
+};
+</script>
+
+<style scoped>
+.photo_desc {
+  padding: 10px 10px;
+  margin: 10px 0;
+  /* border-top: 1px #ccc solid; */
+  /* border-bottom: 1px #ccc solid; */
+  border-left: 5px rgb(109, 192, 178,55) solid;
+}
+.comment_layout {
+  padding: 10px;
+  /* margin-top: 300px; */
+  float: right;
+  width: 20vw;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: white;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+.photo_name {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+}
+.photo_info {
+  background-color: white;
+  height: 40vh;
+  width: 100%;
+}
+.belong_album {
+  color: #555;
+  font-size: 10pt;
+}
+.date {
+  color: #555;
+  font-size: 8px;
+}
+.comments {
+  height: 150px;
+  overflow: scroll;
+}
+.comment_user_item {
+  padding: 10px;
+  border-bottom: 1px #ddd solid;
+  display: flex;
+}
+.comment_user {
+  font-size: 8px;
+  font-weight: 600;
+}
+.comment_content {
+  margin-left: 10px;
+}
+.comment_content label {
+  display: block;
+}
+.comment_content .date{
+
+}
+.comment_content .content {
+  margin-top: 6px;
+}
+</style>

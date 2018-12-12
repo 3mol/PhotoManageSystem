@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" style="background:rgb(250, 251, 253)">
     <Nav></Nav>
-    <Classify></Classify>
+    <Search></Search>
     <div>
       <keep-alive>
         <router-view></router-view>

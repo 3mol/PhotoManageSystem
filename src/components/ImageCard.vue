@@ -1,25 +1,27 @@
 <template>
-  <el-card :body-style="{ padding: '0px'}">
-    <div >
-      <div class="photo_box" @click="setShowPhoto">
-        <img src="http://t2.hddhhn.com/uploads/tu/201610/198/hkgip2b102z.jpg" class="photo">
-      </div>
+  <div>
+    <div class="photo_box" @click="setShowPhoto">
+      <img class="photo" v-bind:src="photo.photoURL">
+    </div>
+    <div style="position:relative;width:100%">
       <div class="text_content">
-        <h4 class="pdl10">照片名字</h4>
-        <br>
-        <el-tag type="info">时间</el-tag>
+        <div class="photo_name">{{photo.photoName}}</div>
+        <div class="photo_date">12-12 19:29</div>
       </div>
     </div>
-  </el-card>
+  </div>
 </template>
  
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
+  props: {
+    photo: Object,
+    required: true
+  },
   data() {
-    return {
-    };
+    return {};
   },
   computed: mapGetters([
     // 需要用的数据
@@ -27,36 +29,14 @@ export default {
   ]),
   methods: mapActions([
     // 需要动用的外部方法
-    "setShowPhoto",
+    "setShowPhoto"
   ])
-  
 };
 </script>
 <style scoped>
-.time {
-  font-size: 13px;
-  color: #999;
-}
-
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
-}
-
-.button {
-  padding: 0;
-  float: right;
-}
-
 .image {
   width: 100%;
   display: block;
-}
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
 }
 
 .clearfix:after {
@@ -73,6 +53,7 @@ export default {
   overflow: hidden;
 }
 .text_content {
+  text-align: center;
   position: relative;
   width: 100%;
   height: 50px;
@@ -82,5 +63,13 @@ export default {
 .text_label {
   padding: 5px 20px;
   font-weight: 600;
+}
+
+.photo_name {
+  margin-top: 10px;
+}
+.photo_date {
+  font-size: 12px;
+  color: #ccc;
 }
 </style>

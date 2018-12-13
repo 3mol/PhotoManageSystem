@@ -1,30 +1,48 @@
 <template>
-  <div class="container" >
-        <!-- <i style="float:left;font-size:60px;color: rgb(145, 201, 246);" class="el-icon-picture"></i> -->
-        <div style="float:left;margin-left:20px">
-          <div class="album_name"  @click="setShowAlbum">- 相册名字</div>
-          <div class="album_time">时间</div>
-          <div class="album_desc">详情</div>
-        </div>
-        <div style="clear:both"></div>
-        <el-row class="row-bg mgt10" :gutter="20">
-          <el-col :xs="12" :sm="12" :md="4" :lg="4" :xl="4" v-for="key in 6" v-bind:key="key">
-            <img
-              class="photo"
-              width="100%"
-              src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1544622391&di=0a5dc5512bd27ebf8d0235224d119f9b&src=http://imgsrc.baidu.com/imgad/pic/item/b7003af33a87e950782ec0421b385343fbf2b4e6.jpg" @click.stop="setShowPhoto"
-            >
-          </el-col>
-        </el-row>
-      </div>
+  <div class="container">
+    <!-- <i style="float:left;font-size:60px;color: rgb(145, 201, 246);" class="el-icon-picture"></i> -->
+    <div style="float:left;margin-left:20px">
+      <div class="album_name" @click="setShowAlbum">- {{album.albumName}}</div>
+      <div class="album_time">{{album.albumCreatetime}}</div>
+      <div class="album_desc">{{album.albumDesc}}</div>
+    </div>
+    <div style="clear:both"></div>
+    <el-row class="row-bg mgt10" :gutter="20">
+      <!-- 显示六张缩略图照片 -->
+      <el-col
+        :xs="12"
+        :sm="12"
+        :md="4"
+        :lg="4"
+        :xl="4"
+        v-for="(photo,index) in album.photos"
+        v-bind:key="photo.photoId"
+      >
+        <img
+          @click="setShowPhoto();setPopPhotos({photos,index})"
+          class="photo"
+          width="100%"
+          v-if="index < 6"
+          :src="photo.photoURL"
+        >
+      </el-col>
+    </el-row>
+  </div>
 </template>
  
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
+  props: {
+    album: Object
+  },
   data() {
-    return {};
+    return {
+      // todo 获取父控件的单个图片对象的prop
+      // 获取相册的所有图片，然后用于传递给popPhoto窗体
+      photos: this.album.photos
+    };
   },
   computed: mapGetters([
     // 需要用的数据
@@ -34,7 +52,8 @@ export default {
   methods: mapActions([
     // 需要动用的外部方法
     "setShowPhoto",
-    "setShowAlbum"
+    "setShowAlbum",
+    "setPopPhotos"
   ])
 };
 </script>
@@ -52,13 +71,14 @@ export default {
   display: block;
   height: 100%;
 }
-.photo:hover{
+.photo:hover {
   cursor: pointer;
 }
 .album_name {
   font-size: 20px;
   color: rgb(88, 73, 58);
-}.album_name:hover {
+}
+.album_name:hover {
   cursor: pointer;
   color: rgb(191, 156, 121);
 }

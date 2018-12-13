@@ -3,8 +3,18 @@
     <div class="container">
       <Classify></Classify>
       <el-row class="row-bg" :gutter="20">
-        <el-col :xs="12" :sm="12" :md="6" :lg="6" :xl="4" v-for="item in photos" :key="item.photoId">
-          <ImageCard v-bind:photo="item"></ImageCard>
+        <el-col
+          :xs="12"
+          :sm="12"
+          :md="6"
+          :lg="6"
+          :xl="4"
+          v-for="(item,index) in photos"
+          :key="item.photoId"
+        >
+          <div @click="setShowPhoto();setPopPhotos({photos,index})">
+            <ImageCard v-bind:photo="item" class="image_card_hover"></ImageCard>
+          </div>
         </el-col>
       </el-row>
       <div class="mgt30" style="text-align: center">
@@ -18,6 +28,9 @@
 </template>
  
 <style scoped>
+.image_card_hover:hover {
+  cursor: pointer;
+}
 .el-col {
   margin-bottom: 20px;
 }
@@ -51,6 +64,7 @@
 </style>
 
 <script>
+import { mapState, mapGetters, mapActions } from "vuex";
 import ImageCard from "../ImageCard.vue";
 import PopPhotoLayout from "./PopPhotoLayout.vue";
 import Classify from "../Classify.vue";
@@ -70,7 +84,7 @@ export default {
             "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3819531008,942434957&fm=200&gp=0.jpg"
         },
         {
-          photoId:2,
+          photoId: 2,
           photoName: "图片D",
           photoDesc: 25,
           photoCreatetime: "2018年12月12日",
@@ -100,7 +114,7 @@ export default {
             "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
         },
         {
-          photoId:5,
+          photoId: 5,
           photoName: "图片D",
           photoDesc: 25,
           photoCreatetime: "2018年12月21日",
@@ -136,6 +150,15 @@ export default {
     ImageCard,
     PopPhotoLayout,
     Classify
+  },
+  methods: {
+    setPopPhotos(val) {
+      return this.$store.dispatch("setPopPhotos", val);
+    },
+    setShowPhoto(val) {
+      // 
+      return this.$store.dispatch("setShowPhoto", val);
+    }
   }
 };
 </script>

@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div class="photo_box" @click="setShowPhoto">
-      <img class="photo"  :src="photo.photoURL">
+    <div class="photo_box">
+      <div
+        ref="ele"
+        class="photo"
+        v-bind:style="{backgroundImage:'url(' + photo.photoURL + ')',height: imageCardWidth}"
+      ></div>
+      <!-- <img class="photo" :src="photo.photoURL"> -->
     </div>
     <div style="position:relative;width:100%">
       <div class="text_content">
@@ -20,7 +25,10 @@ export default {
     photo: Object
   },
   data() {
-    return {};
+    return {
+      imageCardHeight: 0,
+      imageCardWidth: 0
+    };
   },
   computed: mapGetters([
     // 需要用的数据
@@ -29,7 +37,15 @@ export default {
   methods: mapActions([
     // 需要动用的外部方法
     "setShowPhoto"
-  ])
+  ]),
+  mounted() {
+    var width = window.getComputedStyle(this.$refs.ele).width; // ？px
+    this.imageCardWidth = width;
+    console.log(width);
+  }
+  ,
+  watch(){
+  }
 };
 </script>
 <style scoped>
@@ -43,12 +59,13 @@ export default {
 }
 
 .photo {
-  display: block;
-  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .photo_box {
-  height: 250px;
+  /* height: 250px; */
   overflow: hidden;
 }
 .text_content {

@@ -1,22 +1,37 @@
 <template>
-  <div class="search_border">
-    <input type="text" style="height: 35px;width: 60%;" placeholder="输入搜索的照片号/照片名称">
-    <el-button type="danger">搜索</el-button>
+
+  <div style="margin-top: 40px;display:flex; justify-content: center;">
+    <div style="width:40%">
+      <el-input placeholder="请输入内容" v-model="search_content" class="input-with-select">
+        <el-select v-model="select" slot="prepend" placeholder="请选择">
+          <el-option label="图片名" value="1"></el-option>
+          <el-option label="相册名" value="2"></el-option>
+          <el-option label="相片编号" value="3"></el-option>
+        </el-select>
+        <el-button slot="append" class="el-icon-search" ></el-button>
+      </el-input>
+    </div>
   </div>
 </template>
-
+<style>
+.el-select .el-input {
+  width: 130px;
+}
+.input-with-select .el-input-group__prepend {
+  background-color: #fff;
+}
+.el-input-group__append{
+  color: #fff;
+    background: rgba(81, 136, 152, 0.85);
+}
+</style>
 <script>
 export default {
   data() {
     return {
-      input: ""
+      search_content: "",
+      select: "1"
     };
   }
 };
 </script>
-<style scoped>
-.search_border {
-  text-align: center;
-  margin-top: 30px;
-}
-</style>

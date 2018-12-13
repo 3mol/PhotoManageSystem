@@ -122,9 +122,6 @@ export default {
 .comment_content label {
   display: block;
 }
-.comment_content .date{
-
-}
 .comment_content .content {
   margin-top: 6px;
 }

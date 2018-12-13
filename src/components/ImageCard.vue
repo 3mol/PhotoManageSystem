@@ -41,11 +41,8 @@ export default {
   mounted() {
     var width = window.getComputedStyle(this.$refs.ele).width; // ？px
     this.imageCardWidth = width;
-    console.log(width);
-  }
-  ,
-  watch(){
-  }
+    console.log("imageCardWidth:" + width);
+  },
 };
 </script>
 <style scoped>

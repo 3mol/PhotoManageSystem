@@ -7,7 +7,7 @@
       <div class="album_desc">{{album.albumDesc}}</div>
     </div>
     <div style="clear:both"></div>
-    <el-row class="row-bg mgt10" :gutter="20">
+    <el-row class="row-bg mgt10" :gutter="10">
       <!-- 显示六张缩略图照片 -->
       <el-col
         :xs="12"
@@ -18,13 +18,14 @@
         v-for="(photo,index) in album.photos"
         v-bind:key="photo.photoId"
       >
-        <img
-          @click="setShowPhoto();setPopPhotos({photos,index})"
-          class="photo"
-          width="100%"
-          v-if="index < 6"
-          :src="photo.photoURL"
-        >
+        <div class="photo_box" ref="ele2" v-if="index < 6">
+          <div 
+            @click="setShowPhoto();setPopPhotos({photos,index})"
+            class="photo"
+            v-bind:style="{backgroundImage:'url(' + photo.photoURL + ')'}"
+          ></div>
+          <!-- <img class="photo" :src="photo.photoURL"> -->
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -41,7 +42,7 @@ export default {
     return {
       // todo 获取父控件的单个图片对象的prop
       // 获取相册的所有图片，然后用于传递给popPhoto窗体
-      photos: this.album.photos
+      photos: this.album.photos,
     };
   },
   computed: mapGetters([
@@ -54,7 +55,7 @@ export default {
     "setShowPhoto",
     "setShowAlbum",
     "setPopPhotos"
-  ])
+  ]),
 };
 </script>
 
@@ -68,8 +69,11 @@ export default {
   box-shadow: #eaeaea 1px 1px 1px;
 }
 .photo {
-  display: block;
-  height: 100%;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 10px;
+  background-size: cover;
 }
 .photo:hover {
   cursor: pointer;

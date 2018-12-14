@@ -19,10 +19,10 @@
         v-bind:key="photo.photoId"
       >
         <div class="photo_box" ref="ele2" v-if="index < 6">
-          <div 
+          <div
             @click="setShowPhoto();setPopPhotos({photos,index})"
             class="photo"
-            v-bind:style="{backgroundImage:'url(' + photo.photoURL + ')'}"
+            v-bind:style="{backgroundImage:'url(' + addFlag(photo.photoOriginalUrl) + ')'}"
           ></div>
           <!-- <img class="photo" :src="photo.photoURL"> -->
         </div>
@@ -42,7 +42,7 @@ export default {
     return {
       // todo 获取父控件的单个图片对象的prop
       // 获取相册的所有图片，然后用于传递给popPhoto窗体
-      photos: this.album.photos,
+      photos: this.album.photos
     };
   },
   computed: mapGetters([
@@ -50,12 +50,31 @@ export default {
     "showAlbum",
     "showPhoto"
   ]),
-  methods: mapActions([
-    // 需要动用的外部方法
-    "setShowPhoto",
-    "setShowAlbum",
-    "setPopPhotos"
-  ]),
+  methods: {
+     setShowPhoto(val) {
+      return this.$store.dispatch("setShowPhoto", val);
+    },
+    setShowAlbum(val) {
+      //
+      return this.$store.dispatch("setShowAlbum", val);
+    },
+    setPopPhotos(val) {
+      //
+      return this.$store.dispatch("setPopPhotos", val);
+    },
+    addFlag(val) {
+      return "'" + val + "'";
+    }
+  }
+  // mapActions([
+  //   // 需要动用的外部方法
+  //   "setShowPhoto",
+  //   "setShowAlbum",
+  //   "setPopPhotos"
+  // ]),
+  // addFlag(val){
+  //     return "\'"+val+"\'";
+  //   }
 };
 </script>
 

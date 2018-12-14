@@ -1,4 +1,5 @@
 <template>
+import { watch } from 'fs';
   <div class="comment_layout">
     <div class="photo_info">
       <div>
@@ -56,7 +57,7 @@ export default {
     return {
       input: ""
     };
-  }
+  },
 };
 </script>
 

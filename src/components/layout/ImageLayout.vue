@@ -152,7 +152,7 @@ export default {
     Classify
   },
   mounted() {
-    
+    this.getPhotos()
   },
   methods: {
     setPopPhotos(val) {

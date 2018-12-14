@@ -3,7 +3,7 @@
     <!-- <transition name="el-zoom-in-top"> -->
       <div id="app" class="container" v-show="showPhoto">
         <div style="display: flex; justify-content:center; height:100vh; align-items: center;">
-          <img style="height: 70%;" v-if="popPhotos!=null" v-bind:src="popPhotos[popPhotoIndex].photoURL">
+          <img style="height: 70%;" v-if="popPhotos!=null" v-bind:src="popPhotos[popPhotoIndex].photoOriginalUrl">
         </div>
         <img
           @click="setShowPhoto"

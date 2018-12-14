@@ -14,7 +14,7 @@
         style="border: 1px #ffb2b2 solid;width: 100%;height: 80%;overflow-y:auto; overflow-x:hidden;  "
       >
         <el-row class="row-bg" :gutter="20">
-          <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8"   v-for="(item,index) in photos"
+          <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8"   v-for="(item) in photos"
           :key="item.photoId">
             <ImageCard v-bind:photo="item"></ImageCard>
           </el-col>

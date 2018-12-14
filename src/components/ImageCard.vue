@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="photo_box">
-      <div
-        ref="ele"
-        class="photo"
-        v-bind:style="{backgroundImage:'url(' + photo.photoURL + ')',height: imageCardWidth}"
-      ></div>
-      <!-- <img class="photo" :src="photo.photoURL"> -->
+      <!-- todo bind use 双引号 -->
+      <div ref="ele" 
+      class="photo"
+      v-bind:style="{backgroundImage:'url(' + addFlag(photo.photoThumUrl) + ')',height:imageCardWidth}"
+       ></div>
+       <!-- v-bind:style="{backgroundImage:'url(' + photo.photoThumUrl + ')',height: imageCardWidth}" -->
+      <!-- <img class="photo" :src="photo.photoOriginalUrl" > -->
     </div>
     <div style="position:relative;width:100%">
       <div class="text_content">
@@ -26,23 +27,32 @@ export default {
   },
   data() {
     return {
+      // v-bind:style="{backgroundImage:'url(' + photo.photoOriginalUrl + ')',height: imageCardWidth}"
       imageCardHeight: 0,
-      imageCardWidth: 0
+      imageCardWidth: 0,
+      // bgImg: {
+      //   backgroundImage: "url(" + photo.photoOriginalUrl + ")",
+      //   height: imageCardWidth
+      // }
     };
   },
   computed: mapGetters([
     // 需要用的数据
     "showPhoto"
   ]),
-  methods: mapActions([
-    // 需要动用的外部方法
-    "setShowPhoto"
-  ]),
+  methods:{
+    setShowPhoto(val) {
+      return this.$store.dispatch("setShowPhoto", val);
+    },
+    addFlag(val){
+      return "\'"+val+"\'";
+    }
+  },
   mounted() {
     var width = window.getComputedStyle(this.$refs.ele).width; // ？px
     this.imageCardWidth = width;
     console.log("imageCardWidth:" + width);
-  },
+  }
 };
 </script>
 <style scoped>

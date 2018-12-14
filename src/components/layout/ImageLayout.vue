@@ -18,7 +18,7 @@
         </el-col>
       </el-row>
       <div class="mgt30" style="text-align: center">
-        <el-button round style="padding:10px 100px;">查看更多</el-button>
+        <el-button round style="padding:10px 100px;" @click="getPhotos()">查看更多</el-button>
       </div>
     </div>
     <div>
@@ -73,76 +73,76 @@ export default {
   data() {
     return {
       photos: [
-        {
-          photoId: 1,
-          photoName: "图片C",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月2日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3819531008,942434957&fm=200&gp=0.jpg"
-        },
-        {
-          photoId: 2,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月12日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1059770508,159053842&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 3,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月23日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4134070514,2065750022&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 4,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月22日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 5,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月21日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3257286882,1013914695&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 6,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月2日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1318618513,3987037995&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 7,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月2日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
-        }
+        // {
+        //   photoId: 1,
+        //   photoName: "图片C",
+        //   photoDesc: 25,
+        //   photoCreatetime: "2018年12月2日",
+        //   albumId: 2,
+        //   albumName: "sad",
+        //   photoOriginalUrl:
+        //     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3819531008,942434957&fm=200&gp=0.jpg"
+        // },
+        // {
+        //   photoId: 2,
+        //   photoName: "图片D",
+        //   photoDesc: 25,
+        //   photoCreatetime: "2018年12月12日",
+        //   albumId: 2,
+        //   albumName: "sad",
+        //   photoOriginalUrl:
+        //     "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1059770508,159053842&fm=26&gp=0.jpg"
+        // },
+        // {
+        //   photoId: 3,
+        //   photoName: "图片D",
+        //   photoDesc: 25,
+        //   photoCreatetime: "2018年12月23日",
+        //   albumId: 2,
+        //   albumName: "sad",
+        //   photoOriginalUrl:
+        //     "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4134070514,2065750022&fm=26&gp=0.jpg"
+        // },
+        // {
+        //   photoId: 4,
+        //   photoName: "图片D",
+        //   photoDesc: 25,
+        //   photoCreatetime: "2018年12月22日",
+        //   albumId: 2,
+        //   albumName: "sad",
+        //   photoOriginalUrl:
+        //     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
+        // },
+        // {
+        //   photoId: 5,
+        //   photoName: "图片D",
+        //   photoDesc: 25,
+        //   photoCreatetime: "2018年12月21日",
+        //   albumId: 2,
+        //   albumName: "sad",
+        //   photoOriginalUrl:
+        //     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3257286882,1013914695&fm=26&gp=0.jpg"
+        // },
+        // {
+        //   photoId: 6,
+        //   photoName: "图片D",
+        //   photoDesc: 25,
+        //   photoCreatetime: "2018年12月2日",
+        //   albumId: 2,
+        //   albumName: "sad",
+        //   photoOriginalUrl:
+        //     "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1318618513,3987037995&fm=26&gp=0.jpg"
+        // },
+        // {
+        //   photoId: 7,
+        //   photoName: "图片D",
+        //   photoDesc: 25,
+        //   photoCreatetime: "2018年12月2日",
+        //   albumId: 2,
+        //   albumName: "sad",
+        //   photoOriginalUrl:
+        //     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
+        // }
       ]
     };
   },
@@ -151,13 +151,27 @@ export default {
     PopPhotoLayout,
     Classify
   },
+  mounted() {
+    
+  },
   methods: {
     setPopPhotos(val) {
       return this.$store.dispatch("setPopPhotos", val);
     },
     setShowPhoto(val) {
-      // 
+      //
       return this.$store.dispatch("setShowPhoto", val);
+    },
+    getPhotos: function() {
+      var successCallback = response => {
+        console.log("服务器请求成功了");
+        console.log(response.data);
+        this.photos=response.data.data;
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http.get("http://127.0.0.1:8080/photo").then(successCallback, errorCallback);
     }
   }
 };

@@ -7,6 +7,10 @@ import VueRouter from 'vue-router'
 import routerConfig from './router.config.js'
 // import axios from 'axios'
 import store from './store.js' //导入store对象
+import VueResource from 'vue-resource';
+
+/*使用VueResource插件*/
+Vue.use(VueResource);
 
 // 2. 使用VueRouter
 Vue.use(VueRouter);
@@ -22,5 +26,6 @@ new Vue({
   el: '#app',
   render: h => h(App),
   router,
-  store
+  store,
+  VueResource,//通过import引入，然后在这里调用
 })

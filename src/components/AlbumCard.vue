@@ -75,9 +75,6 @@ export default {
     getPopPhotoAlbumInfo(albumId) {
       return this.$store.dispatch("getPopPhotoAlbumInfo", albumId);
     },
-    getAllPhotos(albumId) {
-      return this.$store.dispatch("getAllPhotos");
-    },
     addFlag(val) {
       return "'" + val + "'";
     },

@@ -12,7 +12,7 @@ var state = {
 	allPhotos: [],
 	showAlbum: false,
 	showPhoto: false,
-	popPhotos: null,
+	popPhotos: [],
 	popPhotoIndex: 1,
 	popAlbumId: -1,
 	comments: null,

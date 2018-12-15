@@ -2,7 +2,8 @@
   <div>
     <!-- <transition name="el-zoom-in-top"> -->
     <div id="app" class="container" v-show="showPhoto">
-      <div style="display: flex; justify-content:center; height:100vh; align-items: center;">
+      <div style="display: flex; justify-content:center; height:100vh; align-items: center;"
+      >
         <img style="height: 70%;" v-bind:src="popPhotos[popPhotoIndex].photoOriginalUrl">
       </div>
       <img
@@ -29,9 +30,7 @@
         src="/src/assets/img/left.png"
         style="width: 40px;height: 40px;position: absolute;left: 50px;top: 50vh;"
       >
-      <!-- <div style="background:#fff">缩略图等等的</div> -->
     </div>
-    <!-- </transition> -->
     <transition name="el-zoom-in-topx">
       <CommentLayout
         v-show="showPhoto"

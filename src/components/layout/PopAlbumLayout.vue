@@ -14,9 +14,25 @@
         style="border: 1px #ffb2b2 solid;width: 100%;height: 80%;overflow-y:auto; overflow-x:hidden;  "
       >
         <el-row class="row-bg" :gutter="20">
-          <el-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8"   v-for="(item) in photos"
-          :key="item.photoId">
-            <ImageCard v-bind:photo="item"></ImageCard>
+          <el-col
+            :xs="12"
+            :sm="12"
+            :md="6"
+            :lg="6"
+            :xl="6"
+            v-for="(item,index) in photos"
+            :key="item.photoId"
+          >
+          <div
+           @click="
+          setShowPhoto();
+          setComments(item.photoId);
+          setPopPhotoAlbumInfo(item.albumId);
+          setPopPhotos({photos,index});
+          "
+          >
+            <ImageCard v-bind:photo="item" ></ImageCard>
+          </div>
           </el-col>
         </el-row>
       </div>
@@ -30,9 +46,8 @@ import { mapState, mapGetters, mapActions } from "vuex";
 import ImageCard from "../ImageCard.vue";
 
 export default {
-  data(){
-    
-return {
+  data() {
+    return {
       photos: [
         {
           photoId: 1,
@@ -104,7 +119,7 @@ return {
           photoURL:
             "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
         }
-      ]
+      ],
     };
   },
   components: {
@@ -113,12 +128,86 @@ return {
   computed: mapGetters([
     // 需要用的数据
     "showAlbum",
+    "popAlbumId"
   ]),
-  methods: mapActions([
-    // 需要动用的外部方法
-    "setShowAlbum"
-  ]),
-  
+  methods: {
+    setShowPhoto(val) {
+      return this.$store.dispatch("setShowPhoto", val);
+    },
+    setShowAlbum(val) {
+      return this.$store.dispatch("setShowAlbum", val);
+    },
+    setPopAlbumId(val) {
+      return this.$store.dispatch("setPopAlbumId", val);
+    },
+    setPopPhotos(val) {
+      return this.$store.dispatch("setPopPhotos", val);
+    },
+    setShowPhoto(val) {
+      return this.$store.dispatch("setShowPhoto", val);
+    },
+    setComments(photoId) {
+      // 获取点击图片的评论信息
+      var successCallback = response => {
+        console.log("服务器请求成功了setComments");
+        return this.$store.dispatch(
+          "setComments",
+          response.data.data[0].comments
+        );
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/photo/photoId?params=" + photoId)
+        .then(successCallback, errorCallback);
+    },
+    setPopPhotoAlbumInfo(albumId) {
+      // 获取点击图片的相册信息
+      var successCallback = response => {
+        console.log("服务器请求成功了setPopPhotoAlbumInfo");
+        return this.$store.dispatch(
+          "setPopPhotoAlbumInfo",
+          response.data.data[0]
+        );
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
+        .then(successCallback, errorCallback);
+    },
+    getPhotos: function() {
+      // 获取首页的所有图片
+      var successCallback = response => {
+        console.log("服务器请求成功了getPhotos");
+        this.photos = response.data.data;
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/photo")
+        .then(successCallback, errorCallback);
+    }
+  },
+  watch: {
+    popAlbumId: function(popAlbumId) {
+      console.log("当前的popAlbumId", popAlbumId);
+      var successCallback = response => {
+        console.log("服务器请求成功了");
+        console.log(response.data);
+        this.photos = response.data.data[0].photos;
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/album/AlbumId?params="+popAlbumId)
+        .then(successCallback, errorCallback);
+    }
+  }
 };
 </script>
 

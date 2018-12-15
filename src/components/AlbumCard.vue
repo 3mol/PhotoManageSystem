@@ -2,7 +2,10 @@
   <div class="container">
     <!-- <i style="float:left;font-size:60px;color: rgb(145, 201, 246);" class="el-icon-picture"></i> -->
     <div style="float:left;margin-left:20px">
-      <div class="album_name" @click="setShowAlbum">- {{album.albumName}}</div>
+      <div
+        class="album_name"
+        @click="setShowAlbum();setPopAlbumId(album.albumId)"
+      >- {{album.albumName}}</div>
       <div class="album_time">{{album.albumCreatetime}}</div>
       <div class="album_desc">{{album.albumDesc}}</div>
     </div>
@@ -20,7 +23,12 @@
       >
         <div class="photo_box" ref="ele2" v-if="index < 6">
           <div
-            @click="setShowPhoto();setPopPhotos({photos,index})"
+            @click="
+            setShowPhoto();
+            setPopPhotos({photos,index});
+            setComments(photo.photoId);
+            setPopPhotoAlbumInfo(photo.albumId);
+            "
             class="photo"
             v-bind:style="{backgroundImage:'url(' + addFlag(photo.photoOriginalUrl) + ')'}"
           ></div>
@@ -48,10 +56,10 @@ export default {
   computed: mapGetters([
     // 需要用的数据
     "showAlbum",
-    "showPhoto"
+    "popAlbumId"
   ]),
   methods: {
-     setShowPhoto(val) {
+    setShowPhoto(val) {
       return this.$store.dispatch("setShowPhoto", val);
     },
     setShowAlbum(val) {
@@ -62,8 +70,56 @@ export default {
       //
       return this.$store.dispatch("setPopPhotos", val);
     },
+    setPopAlbumId(val) {
+      return this.$store.dispatch("setPopAlbumId", val);
+    },
     addFlag(val) {
       return "'" + val + "'";
+    },
+    setComments(photoId) {
+      // 获取点击图片的评论信息
+      var successCallback = response => {
+        console.log("服务器请求成功了setComments");
+        return this.$store.dispatch(
+          "setComments",
+          response.data.data[0].comments
+        );
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/photo/photoId?params=" + photoId)
+        .then(successCallback, errorCallback);
+    },
+    setPopPhotoAlbumInfo(albumId) {
+      // 获取点击图片的相册信息
+      var successCallback = response => {
+        console.log("服务器请求成功了setPopPhotoAlbumInfo");
+        return this.$store.dispatch(
+          "setPopPhotoAlbumInfo",
+          response.data.data[0]
+        );
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
+        .then(successCallback, errorCallback);
+    },
+    getPhotos: function() {
+      // 获取首页的所有图片
+      var successCallback = response => {
+        console.log("服务器请求成功了getPhotos");
+        this.photos = response.data.data;
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/photo")
+        .then(successCallback, errorCallback);
     }
   }
   // mapActions([

@@ -27,13 +27,8 @@ export default {
   },
   data() {
     return {
-      // v-bind:style="{backgroundImage:'url(' + photo.photoOriginalUrl + ')',height: imageCardWidth}"
       imageCardHeight: 0,
       imageCardWidth: 0,
-      // bgImg: {
-      //   backgroundImage: "url(" + photo.photoOriginalUrl + ")",
-      //   height: imageCardWidth
-      // }
     };
   },
   computed: mapGetters([

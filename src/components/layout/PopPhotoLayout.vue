@@ -1,30 +1,46 @@
 <template>
   <div>
     <!-- <transition name="el-zoom-in-top"> -->
-      <div id="app" class="container" v-show="showPhoto">
-        <div style="display: flex; justify-content:center; height:100vh; align-items: center;">
-          <img style="height: 70%;" v-if="popPhotos!=null" v-bind:src="popPhotos[popPhotoIndex].photoOriginalUrl">
-        </div>
+    <div id="app" class="container" v-show="showPhoto">
+      <div style="display: flex; justify-content:center; height:100vh; align-items: center;">
         <img
-          @click="setShowPhoto"
-          src="/src/assets/img/close.png"
-          style="width: 40px;height: 40px;position: absolute;right: 50px;top: 75px;"
+          style="height: 70%;"
+          v-bind:src="popPhotos[popPhotoIndex].photoOriginalUrl"
         >
-        <img
-          @click="incPopPhotoIndex"
-          src="/src/assets/img/right.png"
-          style="width: 40px;height: 40px;position: absolute;right: 50px;top: 50vh;"
-        >
-        <img
-          @click="decPopPhotoIndex"
-          src="/src/assets/img/left.png"
-          style="width: 40px;height: 40px;position: absolute;left: 50px;top: 50vh;"
-        >
-        <div style="background:#fff">缩略图等等的</div>
       </div>
+      <img
+        @click="setShowPhoto"
+        src="/src/assets/img/close.png"
+        style="width: 40px;height: 40px;position: absolute;right: 50px;top: 75px;"
+      >
+      <!-- setComments(popPhotos[popPhotoIndex].photoId);
+      setPopPhotoAlbumInfo(popPhotos[popPhotoIndex].albumId);-->
+      <img
+        @click="
+        incPopPhotoIndex(); 
+        setComments(popPhotos[popPhotoIndex].photoId);
+        setPopPhotoAlbumInfo(popPhotos[popPhotoIndex].albumId);
+        "
+        src="/src/assets/img/right.png"
+        style="width: 40px;height: 40px;position: absolute;right: 50px;top: 50vh;"
+      >
+      <h1>{{popPhotoIndex}}</h1>
+      <img
+        @click="decPopPhotoIndex();
+        setComments(popPhotos[popPhotoIndex].photoId);
+        setPopPhotoAlbumInfo(popPhotos[popPhotoIndex].albumId);"
+        src="/src/assets/img/left.png"
+        style="width: 40px;height: 40px;position: absolute;left: 50px;top: 50vh;"
+      >
+      <!-- <div style="background:#fff">缩略图等等的</div> -->
+    </div>
     <!-- </transition> -->
     <transition name="el-zoom-in-topx">
-      <CommentLayout v-show="showPhoto"></CommentLayout>
+      <CommentLayout
+        v-show="showPhoto"
+        v-bind:photoName="popPhotos[popPhotoIndex].photoName"
+        v-bind:photoCreatetime="popPhotos[popPhotoIndex].photoCreatetime"
+      ></CommentLayout>
     </transition>
   </div>
 </template>
@@ -35,12 +51,7 @@ import CommentLayout from "./CommentLayout.vue";
 export default {
   data() {
     return {
-      show2: true,
-      photoIndex: 0,
       photos: [
-        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544549505750&di=ef4aaf34ab4422242c4cf8481660bdf3&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0134e15850ede3a8012060c8f505f1.jpg",
-        "https://goss2.vcg.com/creative/vcg/800/version23/VCG21408969635.jpg",
-        "https://goss4.vcg.com/creative/vcg/800/version23/VCG41173756925.jpg"
       ]
     };
   },
@@ -71,6 +82,38 @@ export default {
     },
     decPopPhotoIndex(val) {
       return this.$store.dispatch("decPopPhotoIndex", val);
+    },
+    setComments(photoId) {
+      // 获取点击图片的评论信息
+      var successCallback = response => {
+        console.log("pop服务器请求成功了setComments");
+        return this.$store.dispatch(
+          "setComments",
+          response.data.data[0].comments
+        );
+      };
+      var errorCallback = response => {
+        console.log("pop服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/photo/photoId?params=" + photoId)
+        .then(successCallback, errorCallback);
+    },
+    setPopPhotoAlbumInfo(albumId) {
+      // 获取点击图片的相册信息
+      var successCallback = response => {
+        console.log("pop服务器请求成功了setPopPhotoAlbumInfo");
+        return this.$store.dispatch(
+          "setPopPhotoAlbumInfo",
+          response.data.data[0]
+        );
+      };
+      var errorCallback = response => {
+        console.log("pop服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
+        .then(successCallback, errorCallback);
     }
   }
 };

@@ -6,7 +6,9 @@
       <span style="font-size:24px;">Albums</span>
       <i class="el-icon-arrow-down"></i>
       <div v-for="album in albums" :key="album.albumId">
-        <AlbumCard v-bind:album="album"></AlbumCard>
+        <AlbumCard
+        @click="setShowAlbum();setPopAlbumId(album.albumId)"
+         v-bind:album="album"></AlbumCard>
       </div>
     </div>
     <div class="mgt30" style="text-align: center">
@@ -19,6 +21,7 @@
 import AlbumCard from "../AlbumCard.vue";
 import PopAlbumLayout from "./PopAlbumLayout.vue";
 import PopPhotoLayout from "./PopPhotoLayout.vue";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -26,6 +29,10 @@ export default {
     PopAlbumLayout,
     PopPhotoLayout
   },
+  computed: mapGetters([
+    // 需要用的数据
+    "setPopAlbumId",
+  ]),
   methods: {
     getAlbums: function() {
       var successCallback = response => {
@@ -41,9 +48,9 @@ export default {
         .then(successCallback, errorCallback);
     }
   },
-  mounted(){
-            this.getAlbums();
-        },
+  mounted() {
+    this.getAlbums();
+  },
   data() {
     return {
       // todo 获取这个相册的photos

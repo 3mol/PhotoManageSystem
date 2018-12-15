@@ -12,7 +12,14 @@
           v-for="(item,index) in photos"
           :key="item.photoId"
         >
-          <div @click="setShowPhoto();setPopPhotos({photos,index})">
+          <div
+            @click="
+          setShowPhoto();
+          setComments(item.photoId);
+          setPopPhotoAlbumInfo(item.albumId);
+          setPopPhotos({photos,index});
+          "
+          >
             <ImageCard v-bind:photo="item" class="image_card_hover"></ImageCard>
           </div>
         </el-col>
@@ -72,78 +79,7 @@ import Classify from "../Classify.vue";
 export default {
   data() {
     return {
-      photos: [
-        // {
-        //   photoId: 1,
-        //   photoName: "图片C",
-        //   photoDesc: 25,
-        //   photoCreatetime: "2018年12月2日",
-        //   albumId: 2,
-        //   albumName: "sad",
-        //   photoOriginalUrl:
-        //     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3819531008,942434957&fm=200&gp=0.jpg"
-        // },
-        // {
-        //   photoId: 2,
-        //   photoName: "图片D",
-        //   photoDesc: 25,
-        //   photoCreatetime: "2018年12月12日",
-        //   albumId: 2,
-        //   albumName: "sad",
-        //   photoOriginalUrl:
-        //     "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1059770508,159053842&fm=26&gp=0.jpg"
-        // },
-        // {
-        //   photoId: 3,
-        //   photoName: "图片D",
-        //   photoDesc: 25,
-        //   photoCreatetime: "2018年12月23日",
-        //   albumId: 2,
-        //   albumName: "sad",
-        //   photoOriginalUrl:
-        //     "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4134070514,2065750022&fm=26&gp=0.jpg"
-        // },
-        // {
-        //   photoId: 4,
-        //   photoName: "图片D",
-        //   photoDesc: 25,
-        //   photoCreatetime: "2018年12月22日",
-        //   albumId: 2,
-        //   albumName: "sad",
-        //   photoOriginalUrl:
-        //     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
-        // },
-        // {
-        //   photoId: 5,
-        //   photoName: "图片D",
-        //   photoDesc: 25,
-        //   photoCreatetime: "2018年12月21日",
-        //   albumId: 2,
-        //   albumName: "sad",
-        //   photoOriginalUrl:
-        //     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3257286882,1013914695&fm=26&gp=0.jpg"
-        // },
-        // {
-        //   photoId: 6,
-        //   photoName: "图片D",
-        //   photoDesc: 25,
-        //   photoCreatetime: "2018年12月2日",
-        //   albumId: 2,
-        //   albumName: "sad",
-        //   photoOriginalUrl:
-        //     "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1318618513,3987037995&fm=26&gp=0.jpg"
-        // },
-        // {
-        //   photoId: 7,
-        //   photoName: "图片D",
-        //   photoDesc: 25,
-        //   photoCreatetime: "2018年12月2日",
-        //   albumId: 2,
-        //   albumName: "sad",
-        //   photoOriginalUrl:
-        //     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
-        // }
-      ]
+      photos: []
     };
   },
   components: {
@@ -152,26 +88,59 @@ export default {
     Classify
   },
   mounted() {
-    this.getPhotos()
+    this.getPhotos();
   },
   methods: {
     setPopPhotos(val) {
       return this.$store.dispatch("setPopPhotos", val);
     },
     setShowPhoto(val) {
-      //
       return this.$store.dispatch("setShowPhoto", val);
     },
-    getPhotos: function() {
+    setComments(photoId) {
+      // 获取点击图片的评论信息
       var successCallback = response => {
-        console.log("服务器请求成功了");
-        console.log(response.data);
-        this.photos=response.data.data;
+        console.log("服务器请求成功了setComments");
+        return this.$store.dispatch(
+          "setComments",
+          response.data.data[0].comments
+        );
       };
       var errorCallback = response => {
         console.log("服务器请求出错了");
       };
-      this.$http.get("http://127.0.0.1:8080/photo").then(successCallback, errorCallback);
+      this.$http
+        .get("http://127.0.0.1:8080/photo/photoId?params=" + photoId)
+        .then(successCallback, errorCallback);
+    },
+    setPopPhotoAlbumInfo(albumId) {
+      // 获取点击图片的相册信息
+      var successCallback = response => {
+        console.log("服务器请求成功了setPopPhotoAlbumInfo");
+        return this.$store.dispatch(
+          "setPopPhotoAlbumInfo",
+          response.data.data[0]
+        );
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
+        .then(successCallback, errorCallback);
+    },
+    getPhotos: function() {
+      // 获取首页的所有图片
+      var successCallback = response => {
+        console.log("服务器请求成功了getPhotos");
+        this.photos = response.data.data;
+      };
+      var errorCallback = response => {
+        console.log("服务器请求出错了");
+      };
+      this.$http
+        .get("http://127.0.0.1:8080/photo")
+        .then(successCallback, errorCallback);
     }
   }
 };

@@ -17,7 +17,7 @@ Vue.use(VueRouter);
 
 
 //创建路由实例
-const router=new VueRouter(routerConfig);
+const router = new VueRouter(routerConfig);
 
 // Vue.prototype.$http=axios;
 Vue.use(ElementUI);
@@ -26,6 +26,6 @@ new Vue({
   el: '#app',
   render: h => h(App),
   router,
-  store,
   VueResource,//通过import引入，然后在这里调用
+  store,
 })

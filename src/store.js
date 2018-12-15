@@ -4,10 +4,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import vget from 'vue-resource';
 
-// 引入 axios
-import axios from 'axios'
 Vue.use(Vuex);
 
 //定义属性（数据）
@@ -45,36 +42,9 @@ var getters = {
 		return state.popAlbumId;
 	}
 }
-axios.defaults.baseURL = 'https://127.0.0.1:8080'
-axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-// axios.defaults.baseURL = 'https://127.0.0.1:8080';
-// axios.defaults.headers = {
-// 	"Access-Control-Allow-Credentials": "true"
-// };
 //定义actions，要执行的操作，如流程判断、异步请求等
 const actions = {
-	saveForm({ commit, state }) {
-		// axios({
-		// 	method: 'get',
-		// 	url: 'https://127.0.0.1:8080/album/AlbumId?params=1',
-		// })
-		var successCallback = response => {
-			console.log("服务器请求成功了setPopPhotoAlbumInfo");
-			commit('setPopPhotoAlbumInfo', response.data.data[0]);
-		};
-		var errorCallback = response => {
-			console.log("服务器请求出错了");
-		};
-		// VueResource.http
-		// 	.get("http://127.0.0.1:8080/album/AlbumId?params=1")
-		// 	.then(successCallback, errorCallback);
-		Vue.http.get('http://127.0.0.1:8080/album/AlbumId?params=1').then(successCallback, errorCallback);
-
-		// this.$http
-		// 	.get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
-		// 	.then(successCallback, errorCallback);
-	},
 	setShowPhoto({ commit, state }) {
 		commit('setShowPhoto'); //提交一个名为increment的变化，名称可自定义，可以认为是类型名
 	},
@@ -82,7 +52,7 @@ const actions = {
 		commit('setShowAlbum');
 	},
 	setPopPhotos({ commit, state }, val) {
-		console.log("setPopPhotos", val);
+		console.log("setPopPhotos",val);
 		commit('setPopPhotos', val);
 	},
 	incPopPhotoIndex({ commit, state }) {

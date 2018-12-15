@@ -1,4 +1,5 @@
 <template>
+
   <div style="margin-top: 40px;display:flex; justify-content: center;">
     <div style="width:40%">
       <el-input placeholder="请输入内容" v-model="search_content" class="input-with-select">
@@ -7,7 +8,7 @@
           <el-option label="相册名" value="2"></el-option>
           <el-option label="相片编号" value="3"></el-option>
         </el-select>
-        <el-button slot="append" class="el-icon-search" @click="a"></el-button>
+        <el-button slot="append" class="el-icon-search" ></el-button>
       </el-input>
     </div>
   </div>
@@ -19,9 +20,9 @@
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
 }
-.el-input-group__append {
+.el-input-group__append{
   color: #fff;
-  background: rgba(81, 136, 152, 0.85);
+    background: rgba(81, 136, 152, 0.85);
 }
 </style>
 <script>
@@ -31,11 +32,6 @@ export default {
       search_content: "",
       select: "1"
     };
-  },
-  methods: {
-    a() {
-      this.$store.dispatch("saveForm");
-    }
   }
 };
 </script>

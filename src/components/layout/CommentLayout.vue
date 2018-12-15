@@ -18,7 +18,7 @@
       </div>
       <div class="photo_desc">This thing in future will be a lot.</div>
       <div class="comments" style="overflow:auto">
-        <div class="comment_user_item" v-for="item in comments" :key="item.commentId">
+        <div class="comment_user_item" v-for="item in comments">
           <div class="user_img">
             <img
               src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544634253339&di=bb79e3a83e0153119719b691f793f0ce&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3D97eab9fad139b6004d9b07b3dc60191c%2Fb21c8701a18b87d6a55b1106030828381f30fd8a.jpg"

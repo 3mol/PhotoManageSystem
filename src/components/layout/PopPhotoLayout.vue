@@ -36,10 +36,10 @@
     </div>
     <!-- </transition> -->
     <transition name="el-zoom-in-topx">
+        <!-- v-bind:photoName="popPhotos[popPhotoIndex].photoName" -->
+        <!-- v-bind:photoCreatetime="popPhotos[popPhotoIndex].photoCreatetime" -->
       <CommentLayout
         v-show="showPhoto"
-        v-bind:photoName="popPhotos[popPhotoIndex].photoName"
-        v-bind:photoCreatetime="popPhotos[popPhotoIndex].photoCreatetime"
       ></CommentLayout>
     </transition>
   </div>

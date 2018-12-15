@@ -4,7 +4,8 @@
       <div>
         <div>
           <div>
-            <label class="photo_name">{{photoName}}</label>
+            <label class="photo_name">123{{popPhotos[popPhotoIndex].photoCreatetime
+}}</label>
             <label
               class="belong_album"
               v-if="popPhotoAlbumInfo.albumName"
@@ -64,7 +65,9 @@ export default {
     //这个图片的相册详细信息，
     //也包含了这个相册中的所有图片的信息
     "popPhotoAlbumInfo",
-    "showPhoto"
+    "showPhoto",
+    "popPhotos",
+    "popPhotoIndex"
   ])
 };
 </script>

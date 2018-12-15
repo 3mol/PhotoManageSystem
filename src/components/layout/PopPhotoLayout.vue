@@ -16,8 +16,8 @@
       <img
         @click="
         incPopPhotoIndex(); 
-        setComments(popPhotos[popPhotoIndex].photoId);
-        setPopPhotoAlbumInfo(popPhotos[popPhotoIndex].albumId);
+        getComments(popPhotos[popPhotoIndex].photoId);
+        getPopPhotoAlbumInfo(popPhotos[popPhotoIndex].albumId);
         "
         src="/src/assets/img/right.png"
         style="width: 40px;height: 40px;position: absolute;right: 50px;top: 50vh;"
@@ -25,8 +25,8 @@
       <h1>{{popPhotoIndex}}</h1>
       <img
         @click="decPopPhotoIndex();
-        setComments(popPhotos[popPhotoIndex].photoId);
-        setPopPhotoAlbumInfo(popPhotos[popPhotoIndex].albumId);"
+        getComments(popPhotos[popPhotoIndex].photoId);
+        getPopPhotoAlbumInfo(popPhotos[popPhotoIndex].albumId);"
         src="/src/assets/img/left.png"
         style="width: 40px;height: 40px;position: absolute;left: 50px;top: 50vh;"
       >
@@ -79,37 +79,12 @@ export default {
     decPopPhotoIndex(val) {
       return this.$store.dispatch("decPopPhotoIndex", val);
     },
-    setComments(photoId) {
-      // 获取点击图片的评论信息
-      var successCallback = response => {
-        console.log("pop服务器请求成功了setComments");
-        return this.$store.dispatch(
-          "setComments",
-          response.data.data[0].comments
-        );
-      };
-      var errorCallback = response => {
-        console.log("pop服务器请求出错了");
-      };
-      this.$http
-        .get("http://127.0.0.1:8080/photo/photoId?params=" + photoId)
-        .then(successCallback, errorCallback);
+    getComments(photoId) {
+      return this.$store.dispatch("getComments", val);
     },
-    setPopPhotoAlbumInfo(albumId) {
+    getPopPhotoAlbumInfo(albumId) {
       // 获取点击图片的相册信息
-      var successCallback = response => {
-        console.log("pop服务器请求成功了setPopPhotoAlbumInfo");
-        return this.$store.dispatch(
-          "setPopPhotoAlbumInfo",
-          response.data.data[0]
-        );
-      };
-      var errorCallback = response => {
-        console.log("pop服务器请求出错了");
-      };
-      this.$http
-        .get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
-        .then(successCallback, errorCallback);
+      return this.$store.dispatch("getPopPhotoAlbumInfo", val);
     }
   }
 };

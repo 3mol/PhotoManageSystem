@@ -12,11 +12,33 @@ var state = {
 	allPhotos: [],
 	showAlbum: false,
 	showPhoto: false,
-	popPhotos: [],
-	popPhotoIndex: 1,
+	popPhotos: [{
+		"photoId": 34,
+		"photoName": "阿瑟东",
+		"photoDesc": "s",
+		"photoCreateTime": 1544711288000,
+		"albumId": 1,
+		"photoOriginalUrl": "http://localhost:8080/originalphoto/阿瑟东-1544711288045-vlcsnap-2017-03-08-11h26m06s064.png",
+		"photoThumUrl": "http://localhost:8080/thumphoto/阿瑟东-1544711288053-vlcsnap-2017-03-08-11h26m06s064.png"
+	}],
+	popPhotoIndex: 0,
 	popAlbumId: -1,
 	comments: null,
-	popPhotoAlbumInfo: null,
+	popPhotoAlbumInfo: [{
+		"albumId": 1,
+		"albumName": "相册1",
+		"albumDesc": "相册一的描述",
+		"albumCreatetime": 1544597136000,
+		"photos": [{
+			"photoId": 34,
+			"photoName": "阿瑟东",
+			"photoDesc": "s",
+			"photoCreateTime": 1544711288000,
+			"albumId": 1,
+			"photoOriginalUrl": "http://localhost:8080/originalphoto/阿瑟东-1544711288045-vlcsnap-2017-03-08-11h26m06s064.png",
+			"photoThumUrl": "http://localhost:8080/thumphoto/阿瑟东-1544711288053-vlcsnap-2017-03-08-11h26m06s064.png"
+		}]
+	}],
 	allAlbums: null
 }
 

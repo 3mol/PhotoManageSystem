@@ -4,7 +4,7 @@
       <div>
         <div>
           <div>
-            <label class="photo_name">123{{popPhotos[popPhotoIndex].photoCreatetime
+            <label class="photo_name">{{photoName
 }}</label>
             <label
               class="belong_album"

@@ -5,10 +5,8 @@
     <div class="title_border">
       <span style="font-size:24px;">Albums</span>
       <i class="el-icon-arrow-down"></i>
-      <div v-for="album in albums" :key="album.albumId">
-        <AlbumCard
-        @click="setShowAlbum();setPopAlbumId(album.albumId)"
-         v-bind:album="album"></AlbumCard>
+      <div v-for="album in allAlbums" :key="album.albumId">
+        <AlbumCard @click="setShowAlbum();setPopAlbumId(album.albumId)" v-bind:album="album"></AlbumCard>
       </div>
     </div>
     <div class="mgt30" style="text-align: center">
@@ -32,29 +30,19 @@ export default {
   computed: mapGetters([
     // 需要用的数据
     "setPopAlbumId",
+    "allAlbums"
   ]),
   methods: {
-    getAlbums: function() {
-      var successCallback = response => {
-        console.log("服务器请求成功了");
-        console.log(response.data);
-        this.albums = response.data.data;
-      };
-      var errorCallback = response => {
-        console.log("服务器请求出错了");
-      };
-      this.$http
-        .get("http://127.0.0.1:8080/Album")
-        .then(successCallback, errorCallback);
+    getAllAlbums() {
+      return this.$store.dispatch("getAllAlbums");
     }
   },
   mounted() {
-    this.getAlbums();
+    this.getAllAlbums();
   },
   data() {
     return {
       // todo 获取这个相册的photos
-      albums: []
     };
   }
 };

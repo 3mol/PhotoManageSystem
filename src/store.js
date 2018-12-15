@@ -9,17 +9,22 @@ Vue.use(Vuex);
 
 //定义属性（数据）
 var state = {
+	allPhotos: [],
 	showAlbum: false,
 	showPhoto: false,
 	popPhotos: null,
 	popPhotoIndex: 1,
 	popAlbumId: -1,
 	comments: null,
-	popPhotoAlbumInfo: null
+	popPhotoAlbumInfo: null,
+	allAlbums: null
 }
 
 //定义getters
 var getters = {
+	allPhotos(state) {
+		return state.allPhotos;
+	},
 	showAlbum(state) {
 		return state.showAlbum;
 	},
@@ -40,6 +45,9 @@ var getters = {
 	},
 	popAlbumId(state) {
 		return state.popAlbumId;
+	},
+	allAlbums(state) {
+		return state.allAlbums;
 	}
 }
 
@@ -52,7 +60,7 @@ const actions = {
 		commit('setShowAlbum');
 	},
 	setPopPhotos({ commit, state }, val) {
-		console.log("setPopPhotos",val);
+		console.log("setPopPhotos", val);
 		commit('setPopPhotos', val);
 	},
 	incPopPhotoIndex({ commit, state }) {
@@ -72,8 +80,71 @@ const actions = {
 	},
 	setPopAlbumId({ commit, state }, val) {
 		commit('setPopAlbumId', val);
-	}
+	},
+	getComments({ commit, state }, photoId) {
+		// 获取点击图片的评论信息
+		var successCallback = response => {
+			console.log("get服务器请求成功了setComments");
+			commit(
+				"setComments",
+				response.data.data[0].comments
+			);
+		};
+		var errorCallback = response => {
+			console.log("get服务器请求出错了");
+		};
+		Vue.http
+			.get("http://127.0.0.1:8080/photo/photoId?params=" + photoId)
+			.then(successCallback, errorCallback);
+	},
+	getPopPhotoAlbumInfo({ commit, state }, albumId) {
+		// 获取点击图片的相册信息
+		var successCallback = response => {
+			console.log("get服务器请求成功了setPopPhotoAlbumInfo");
+			commit(
+				"setPopPhotoAlbumInfo",
+				response.data.data[0]
+			);
+		};
+		var errorCallback = response => {
+			console.log("get服务器请求出错了");
+		};
+		Vue.http
+			.get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
+			.then(successCallback, errorCallback);
+	},
+	getAllPhotos({ commit }) {
+		var successCallback = response => {
+			console.log("服务器请求成功了getPhotos");
+			commit(
+				"setAllPhotos",
+				response.data.data
+			);
+		};
+		var errorCallback = response => {
+			console.log("服务器请求出错了");
+		};
+		Vue.http
+			.get("http://127.0.0.1:8080/photo")
+			.then(successCallback, errorCallback);
 
+	},
+	getAllAlbums({ commit }) {
+		var successCallback = response => {
+			console.log("服务器请求成功了 getAllAlbums");
+			commit(
+				"setAllAlbums",
+				response.data.data
+			);
+		};
+		var errorCallback = response => {
+			console.log("服务器请求出错了");
+		};
+		Vue.http
+			.get("http://127.0.0.1:8080/Album")
+			.then(successCallback, errorCallback);
+
+	}
 }
 
 //定义mutations，处理状态（数据）的改变
@@ -91,7 +162,7 @@ const mutations = {
 		state.popAlbumId = val;
 	},
 	setPopPhotos(state, val) {
-		console.log("设置图片索引index:" + val.index);
+		console.log("设置图片索引对象", val);
 		state.popPhotos = val.photos;
 		state.popPhotoIndex = val.index;
 	},
@@ -116,6 +187,16 @@ const mutations = {
 		console.log("获取到这个图片ID的相册信息:");
 		console.log(obj);
 		state.popPhotoAlbumInfo = obj;
+	},
+	setAllPhotos(state, obj) {
+		console.log("获取到这个所有图片信息:");
+		console.log(obj);
+		state.allPhotos = obj;
+	},
+	setAllAlbums(state, obj) {
+		console.log("获取到这个所有相册信息:");
+		console.log(obj);
+		state.allAlbums = obj;
 	}
 }
 

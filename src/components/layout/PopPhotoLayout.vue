@@ -3,10 +3,7 @@
     <!-- <transition name="el-zoom-in-top"> -->
     <div id="app" class="container" v-show="showPhoto">
       <div style="display: flex; justify-content:center; height:100vh; align-items: center;">
-        <img
-          style="height: 70%;"
-          v-bind:src="popPhotos[popPhotoIndex].photoOriginalUrl"
-        >
+        <img style="height: 70%;" v-bind:src="popPhotos[popPhotoIndex].photoOriginalUrl">
       </div>
       <img
         @click="setShowPhoto"
@@ -36,10 +33,10 @@
     </div>
     <!-- </transition> -->
     <transition name="el-zoom-in-topx">
-        <!-- v-bind:photoName="popPhotos[popPhotoIndex].photoName" -->
-        <!-- v-bind:photoCreatetime="popPhotos[popPhotoIndex].photoCreatetime" -->
       <CommentLayout
         v-show="showPhoto"
+        v-bind:photoName="popPhotos[popPhotoIndex].photoName"
+        v-bind:photoCreatetime="popPhotos[popPhotoIndex].photoCreatetime"
       ></CommentLayout>
     </transition>
   </div>
@@ -51,8 +48,7 @@ import CommentLayout from "./CommentLayout.vue";
 export default {
   data() {
     return {
-      photos: [
-      ]
+      photos: []
     };
   },
   components: {
@@ -63,6 +59,7 @@ export default {
     "showAlbum",
     "showPhoto",
     "popPhotos",
+    "allPhotos",
     "popPhotoIndex"
   ]),
   // methods: mapActions([

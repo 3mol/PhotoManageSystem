@@ -52,11 +52,11 @@ export default {
       console.log(to.path);
       if (to.path == "/albums") {
         this.getAllAlbums();
-      } else if (to.path == "/photo") {
+      } else if (to.path == "/photos") {
         this.getAllPhotos();
       }
     }
-    
+
   }
 };
 </script>

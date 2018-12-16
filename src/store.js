@@ -10,7 +10,7 @@ Vue.use(Vuex);
 var state = {
 	// 首页图片和搜索图片信息
 	allPhotos: [],
-	allAlbums: null,
+	allAlbums: [],
 	showAlbum: false,
 	showPhoto: false,
 	popPhotos: [{

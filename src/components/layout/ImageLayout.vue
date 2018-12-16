@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top:40px;">
-    <div class="container"  v-show="allPhotos.length>0">
+    <div class="container" v-show="allPhotos.length>0">
       <Classify></Classify>
       <el-row class="row-bg" :gutter="20">
         <el-col
@@ -34,7 +34,7 @@
     </div>
     <!-- <div>
       <NullLayout v-show="allPhotos.length==0"></NullLayout>
-    </div> -->
+    </div>-->
   </div>
 </template>
  

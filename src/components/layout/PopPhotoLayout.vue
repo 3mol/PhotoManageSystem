@@ -1,6 +1,8 @@
 <template>
   <div>
     <!-- <transition name="el-zoom-in-top"> -->
+    <transition name="el-zoom-in-top">
+
     <div id="app" class="container" v-show="showPhoto">
       <div style="display: flex; justify-content:center; height:100vh; align-items: center;"
       >
@@ -31,7 +33,9 @@
         style="width: 40px;height: 40px;position: absolute;left: 50px;top: 50vh;"
       >
     </div>
-    <transition name="el-zoom-in-topx">
+    </transition>
+
+    <transition name="el-zoom-in-top">
       <CommentLayout
         v-show="showPhoto"
         v-bind:photoName="popPhotos[popPhotoIndex].photoName"

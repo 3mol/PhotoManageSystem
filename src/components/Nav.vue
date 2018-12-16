@@ -5,6 +5,9 @@
     mode="horizontal"
     @select="handleSelect"
   >
+    <el-menu-item style="margin-left:30px;">
+      <img src="/src/assets/img/icon.png" height="100%" alt="LOGO">
+    </el-menu-item>
     <el-menu-item index="1">
       <router-link to="/photos">照片</router-link>
     </el-menu-item>
@@ -12,7 +15,7 @@
       <router-link to="/albums">相册</router-link>
     </el-menu-item>
     <el-menu-item index="3" style="float:right">
-      <a href="https://www.ele.me" target="_blank">后台管理</a>
+      <a href="http://127.0.0.1:8080/Admind" target="_blank">后台管理</a>
     </el-menu-item>
   </el-menu>
 </template>
@@ -28,6 +31,26 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     }
+  },
+  watch: {
+    $route(to, from) {
+      console.log("nav监听路由信息：", to);
+      if (to.path == "/albums") {
+        this.activeIndex = "2";
+      } else if (to.path == "/photos") {
+        this.activeIndex = "1";
+      }
+      // /searchPhotos/:keyWord
+      // /searchAlbums/:keyWord
+    }
   }
 };
 </script>
+<style >
+.el-menu-item {
+  font-size: 18px;
+}
+a {
+  text-decoration: none;
+}
+</style>

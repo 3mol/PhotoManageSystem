@@ -49,12 +49,14 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to.path);
+      console.log("当前的路由信息：",to);
       if (to.path == "/albums") {
         this.getAllAlbums();
       } else if (to.path == "/photos") {
         this.getAllPhotos();
       }
+      // /searchPhotos/:keyWord
+      // /searchAlbums/:keyWord
     }
 
   }

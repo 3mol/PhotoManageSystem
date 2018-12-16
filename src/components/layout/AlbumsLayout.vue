@@ -2,18 +2,21 @@
   <div style="margin-top:40px;">
     <PopAlbumLayout></PopAlbumLayout>
     <PopPhotoLayout></PopPhotoLayout>
-    <div class="title_border">
-      <span style="font-size:24px;">Albums</span>
-      <i class="el-icon-arrow-down"></i>
-      <div v-for="album in allAlbums" :key="album.albumId">
-        <AlbumCard @click="setShowAlbum();setPopAlbumId(album.albumId)" v-bind:album="album"></AlbumCard>
+    <div v-if="allAlbums.length!=0">
+      <div class="title_border">
+        <span style="font-size:24px;">Albums</span>
+        <i class="el-icon-arrow-down"></i>
+        <div v-for="album in allAlbums" :key="album.albumId">
+          <AlbumCard @click="setShowAlbum();setPopAlbumId(album.albumId)" v-bind:album="album"></AlbumCard>
+        </div>
+      </div>
+
+      <div class="mgt30" style="text-align: center">
+        <el-button round style="padding:10px 100px;">查看更多</el-button>
       </div>
     </div>
-      <NullLayout v-if="allAlbums.length==0"></NullLayout>
 
-    <div class="mgt30" style="text-align: center">
-      <el-button round style="padding:10px 100px;">查看更多</el-button>
-    </div>
+    <NullLayout v-if="allAlbums.length==0"></NullLayout>
   </div>
 </template>
  
@@ -21,13 +24,15 @@
 import AlbumCard from "../AlbumCard.vue";
 import PopAlbumLayout from "./PopAlbumLayout.vue";
 import PopPhotoLayout from "./PopPhotoLayout.vue";
+import NullLayout from "./NullLayout.vue";
 import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     AlbumCard,
     PopAlbumLayout,
-    PopPhotoLayout
+    PopPhotoLayout,
+    NullLayout
   },
   computed: mapGetters([
     // 需要用的数据

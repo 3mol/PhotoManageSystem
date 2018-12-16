@@ -32,6 +32,9 @@
       <PopPhotoLayout></PopPhotoLayout>
       <NullLayout v-if="allPhotos.length==0"></NullLayout>
     </div>
+    <!-- <div>
+      <NullLayout v-show="allPhotos.length==0"></NullLayout>
+    </div> -->
   </div>
 </template>
  

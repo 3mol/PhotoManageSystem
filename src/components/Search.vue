@@ -10,7 +10,7 @@
         <el-button
           slot="append"
           class="el-icon-search"
-          @click="getSearchPhotos(search_content)"
+          @click="getSearchPhotos(search_content);"
         ></el-button>
       </el-input>
     </div>
@@ -40,11 +40,13 @@ export default {
   methods: {
     getSearchPhotos() {
       if (this.select == "photoName") {
+        this.$router.push('/searchPhotos');
         return this.$store.dispatch(
           "getSearchPhotosByPhotoName",
           this.search_content
         );
       } else {
+        this.$router.push('/searchAlbums');
         return this.$store.dispatch(
           "getSearchPhotosByAlbumName",
           this.search_content

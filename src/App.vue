@@ -1,6 +1,7 @@
 <template>
   <div id="app" style="background:rgb(250, 251, 253)">
     <Nav></Nav>
+    <Up></Up>
     <Search></Search>
     <div>
       <keep-alive>
@@ -20,6 +21,7 @@ import Nav from "./components/Nav.vue";
 import Search from "./components/Search.vue";
 import Classify from "./components/Classify.vue";
 import Footer from "./components/Footer.vue";
+import Up from "./components/Up.vue";
 
 export default {
   name: "app",
@@ -45,11 +47,12 @@ export default {
     Nav,
     Search,
     Classify,
-    Footer
+    Footer,
+    Up
   },
   watch: {
     $route(to, from) {
-      console.log("当前的路由信息：",to);
+      console.log("当前的路由信息：", to);
       if (to.path == "/albums") {
         this.getAllAlbums();
       } else if (to.path == "/photos") {
@@ -58,7 +61,6 @@ export default {
       // /searchPhotos/:keyWord
       // /searchAlbums/:keyWord
     }
-
   }
 };
 </script>

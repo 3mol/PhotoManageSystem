@@ -88,7 +88,7 @@ export default {
     },
     getPopPhotoAlbumInfo(albumId) {
       // 获取点击图片的相册信息
-      return this.$store.dispatch("getPopPhotoAlbumInfo", val);
+      return this.$store.dispatch("getPopPhotoAlbumInfo", albumId);
     }
   }
 };

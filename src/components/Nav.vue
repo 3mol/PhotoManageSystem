@@ -5,10 +5,10 @@
     mode="horizontal"
     @select="handleSelect"
   >
-    <el-menu-item style="margin-left:30px;">
+    <el-menu-item index="0"  style="margin-left:30px;">
       <img src="/src/assets/img/icon.png" height="100%" alt="LOGO">
     </el-menu-item>
-    <el-menu-item index="1">
+    <el-menu-item index="1" >
       <router-link to="/photos">照片</router-link>
     </el-menu-item>
     <el-menu-item index="2">

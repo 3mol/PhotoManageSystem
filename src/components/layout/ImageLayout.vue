@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top:40px;">
-    <div class="container">
+    <div class="container"  v-show="allPhotos.length>0">
       <Classify></Classify>
       <el-row class="row-bg" :gutter="20">
         <el-col
@@ -30,6 +30,7 @@
     </div>
     <div>
       <PopPhotoLayout></PopPhotoLayout>
+      <NullLayout v-if="allPhotos.length==0"></NullLayout>
     </div>
   </div>
 </template>
@@ -75,6 +76,7 @@ import { mapState, mapGetters, mapActions } from "vuex";
 import ImageCard from "../ImageCard.vue";
 import PopPhotoLayout from "./PopPhotoLayout.vue";
 import Classify from "../Classify.vue";
+import NullLayout from "./NullLayout.vue";
 
 export default {
   data() {
@@ -83,7 +85,8 @@ export default {
   components: {
     ImageCard,
     PopPhotoLayout,
-    Classify
+    Classify,
+    NullLayout
   },
   mounted() {
     this.getAllPhotos();

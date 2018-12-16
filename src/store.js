@@ -9,7 +9,9 @@ Vue.use(Vuex);
 
 //定义属性（数据）
 var state = {
+	// 首页图片和搜索图片信息
 	allPhotos: [],
+	allAlbums: null,
 	showAlbum: false,
 	showPhoto: false,
 	popPhotos: [{
@@ -39,7 +41,6 @@ var state = {
 			"photoThumUrl": "http://localhost:8080/thumphoto/阿瑟东-1544711288053-vlcsnap-2017-03-08-11h26m06s064.png"
 		}]
 	}],
-	allAlbums: null
 }
 
 //定义getters
@@ -148,6 +149,22 @@ const actions = {
 		};
 		Vue.http
 			.get("http://127.0.0.1:8080/photo")
+			.then(successCallback, errorCallback);
+
+	},
+	getSearchPhotosByPhotoName({ commit },keyword) {
+		var successCallback = response => {
+			console.log("服务器请求成功了getPhotos");
+			commit(
+				"setAllPhotos",
+				response.data.data
+			);
+		};
+		var errorCallback = response => {
+			console.log("服务器请求出错了");
+		};
+		Vue.http
+			.get("http://127.0.0.1:8080/photo/photoName?params="+keyword)
 			.then(successCallback, errorCallback);
 
 	},

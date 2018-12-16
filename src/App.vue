@@ -44,7 +44,12 @@ export default {
     Search,
     Classify,
     Footer
+  },
+  watch:{
+  $route(to,from){
+    console.log(to.path);
   }
+},
 };
 </script>
 

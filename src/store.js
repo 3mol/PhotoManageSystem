@@ -168,6 +168,22 @@ const actions = {
 			.then(successCallback, errorCallback);
 
 	},
+	getSearchPhotosByAlbumName({ commit },keyword) {
+		var successCallback = response => {
+			console.log("服务器请求成功了 getAllAlbums");
+			commit(
+				"setAllAlbums",
+				response.data.data
+			);
+		};
+		var errorCallback = response => {
+			console.log("服务器请求出错了");
+		};
+		Vue.http
+			.get("http://127.0.0.1:8080/album/AlbumName?params="+keyword)
+			.then(successCallback, errorCallback);
+
+	},
 	getAllAlbums({ commit }) {
 		var successCallback = response => {
 			console.log("服务器请求成功了 getAllAlbums");

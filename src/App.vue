@@ -8,8 +8,8 @@
       </keep-alive>
     </div>
     <Footer></Footer>
-    <button @click="setShowPhoto"> 显示照片？{{showPhoto}}</button>
-    <button @click="setShowAlbum"> 显示相册？{{showAlbum}}</button>
+    <button @click="setShowPhoto">显示照片？{{showPhoto}}</button>
+    <button @click="setShowAlbum">显示相册？{{showAlbum}}</button>
   </div>
 </template>
 
@@ -37,7 +37,9 @@ export default {
   methods: mapActions([
     // 需要动用的外部方法
     "setShowPhoto",
-    "setShowAlbum"
+    "setShowAlbum",
+    "getAllPhotos",
+    "getAllAlbums"
   ]),
   components: {
     Nav,
@@ -45,11 +47,17 @@ export default {
     Classify,
     Footer
   },
-  watch:{
-  $route(to,from){
-    console.log(to.path);
+  watch: {
+    $route(to, from) {
+      console.log(to.path);
+      if (to.path == "/albums") {
+        this.getAllAlbums();
+      } else if (to.path == "/photo") {
+        this.getAllPhotos();
+      }
+    }
+    
   }
-},
 };
 </script>
 

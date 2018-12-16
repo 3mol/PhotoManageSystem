@@ -9,6 +9,8 @@
         <AlbumCard @click="setShowAlbum();setPopAlbumId(album.albumId)" v-bind:album="album"></AlbumCard>
       </div>
     </div>
+      <NullLayout v-if="allAlbums.length==0"></NullLayout>
+
     <div class="mgt30" style="text-align: center">
       <el-button round style="padding:10px 100px;">查看更多</el-button>
     </div>

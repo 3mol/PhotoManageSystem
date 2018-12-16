@@ -4,9 +4,7 @@
       <div>
         <div>
           <div>
-            <label class="photo_name">
-              {{popPhotos[popPhotoIndex].photoName}}
-            </label>
+            <label class="photo_name">{{popPhotos[popPhotoIndex].photoName}}</label>
             <label class="belong_album">来自: {{popPhotoAlbumInfo.albumName}}</label>
           </div>
           <div>
@@ -38,8 +36,8 @@
       <div>
         <img src="/src/assets/img/dz1.png" alt="点赞" width="24" height="24">
       </div>
-      <el-input v-model="input" placeholder="我現對這個圖片評論"></el-input>
-      <el-button type="primary" style="margin-top:10px; float:right">express</el-button>
+      <el-input v-model="input" placeholder="我要对图片进行评论"></el-input>
+      <el-button type="primary" style="margin-top:10px; float:right" @click="sendComment();">发表</el-button>
     </div>
   </div>
 </template>
@@ -65,7 +63,27 @@ export default {
     "showPhoto",
     "popPhotos",
     "popPhotoIndex"
-  ])
+  ]),
+  methods: {
+    sendComment() {
+      if (this.input == "") {
+        alert("请输入评论内容在尝试发送！");
+      } else {
+        this.$store.dispatch("sendComment", {
+          personId: 1,
+          photoId: this.popPhotos[this.popPhotoIndex].photoId,
+          commentContent: this.input
+        });
+        this.input = "";
+      }
+    },
+    getComments(val) {
+      return this.$store.dispatch(
+        "getComments",
+        this.popPhotos[this.popPhotoIndex].photoId
+      );
+    }
+  }
 };
 </script>
 

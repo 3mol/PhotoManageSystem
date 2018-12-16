@@ -80,7 +80,7 @@ export default {
       return this.$store.dispatch("decPopPhotoIndex", val);
     },
     getComments(photoId) {
-      return this.$store.dispatch("getComments", val);
+      return this.$store.dispatch("getComments", photoId);
     },
     getPopPhotoAlbumInfo(albumId) {
       // 获取点击图片的相册信息

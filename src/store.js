@@ -4,7 +4,6 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex);
 
 //定义属性（数据）
@@ -107,7 +106,7 @@ const actions = {
 	getComments({ commit, state }, photoId) {
 		// 获取点击图片的评论信息
 		var successCallback = response => {
-			console.log("get服务器请求成功了setComments");
+			console.log("服务器请求成功了setComments,photoId is " + photoId);
 			commit(
 				"setComments",
 				response.data.data[0].comments
@@ -192,6 +191,7 @@ const actions = {
 	getAllAlbums({ commit }) {
 		var successCallback = response => {
 			console.log("服务器请求成功了 getAllAlbums");
+			// todo 获取最新的评论
 			commit(
 				"setAllAlbums",
 				response.data.data
@@ -202,6 +202,23 @@ const actions = {
 		};
 		Vue.http
 			.get("http://127.0.0.1:8080/Album")
+			.then(successCallback, errorCallback);
+
+	},
+	sendComment({ commit }, obj) {
+		var successCallback = response => {
+			console.log("服务器请求成功了 sendComment");
+			// 重新获取一次评论
+			this.dispatch('getComments',obj.photoId);
+		};
+		var errorCallback = response => {
+			console.log("服务器请求出错了");
+		};
+		var url = "http://127.0.0.1:8080/comment?person.personId="
+			+ obj.personId + "&photoId=" + obj.photoId + "&commentContent=" + obj.commentContent;
+		console.log(url);
+		Vue.http
+			.post(url)
 			.then(successCallback, errorCallback);
 
 	}

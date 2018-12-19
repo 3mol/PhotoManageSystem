@@ -1,6 +1,8 @@
 <template>
   <div style="margin-top:40px;">
     <div class="container" v-show="allPhotos.length>0">
+      <i class="el-icon-caret-right"></i>
+      <span style="font-size:24px;">Photos</span>
       <Classify></Classify>
       <el-row class="row-bg" :gutter="20">
         <el-col

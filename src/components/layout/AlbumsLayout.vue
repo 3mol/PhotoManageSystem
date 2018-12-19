@@ -4,8 +4,8 @@
     <PopPhotoLayout></PopPhotoLayout>
     <div v-if="allAlbums.length!=0">
       <div class="title_border">
+        <i class="el-icon-caret-right"></i>
         <span style="font-size:24px;">Albums</span>
-        <i class="el-icon-arrow-down"></i>
           <div v-for="album in allAlbums" :key="album.albumId">
             <AlbumCard @click="setShowAlbum();setPopAlbumId(album.albumId)" v-bind:album="album"></AlbumCard>
           </div>

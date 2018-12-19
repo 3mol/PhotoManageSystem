@@ -131,7 +131,7 @@ export default {
   font-size: 8px;
 }
 .comments {
-  height: 150px;
+  height: 300px;
   overflow: scroll;
 }
 .comment_user_item {

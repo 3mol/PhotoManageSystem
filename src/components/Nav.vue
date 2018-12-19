@@ -14,7 +14,10 @@
     <el-menu-item index="2">
       <router-link to="/albums">相册</router-link>
     </el-menu-item>
-    <el-menu-item index="3" style="float:right">
+      <el-menu-item index="3">
+      <router-link to="/upPhoto">临时上传到相册</router-link>
+    </el-menu-item>
+    <el-menu-item index="4" style="float:right">
       <a href="http://127.0.0.1:8080/Admind" target="_blank">后台管理</a>
     </el-menu-item>
   </el-menu>

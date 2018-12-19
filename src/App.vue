@@ -1,7 +1,6 @@
 <template>
   <div id="app" style="background:rgb(250, 251, 253)">
     <Nav></Nav>
-    <Up></Up>
     <Search></Search>
     <div>
       <keep-alive>
@@ -21,7 +20,6 @@ import Nav from "./components/Nav.vue";
 import Search from "./components/Search.vue";
 import Classify from "./components/Classify.vue";
 import Footer from "./components/Footer.vue";
-import Up from "./components/Up.vue";
 
 export default {
   name: "app",
@@ -48,7 +46,6 @@ export default {
     Search,
     Classify,
     Footer,
-    Up
   },
   watch: {
     $route(to, from) {

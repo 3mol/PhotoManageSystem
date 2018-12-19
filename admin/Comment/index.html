@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../Css/style.css" />
+    <script type="text/javascript" src="../Js/jquery.js"></script>
+    <script type="text/javascript" src="../Js/jquery.sorted.js"></script>
+    <script type="text/javascript" src="../Js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Js/ckform.js"></script>
+    <script type="text/javascript" src="../Js/common.js"></script>
+
+ 
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form class="form-inline definewidth m20" action="index.html" method="get">    
+    用户名称：
+    <input type="text" name="albumname" id="albumname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;  
+    <button type="submit" class="btn btn-primary">查找用户评论</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>评论id</th>
+        <th>用户id</th>
+        <th>用户名称</th>
+        <th>照片id</th>
+        <th>评论时间</th>
+        <th>评论内容</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+	     <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>吴亦凡</td>
+            <td>1</td>
+            <td>2018-12-11</td>
+            <td>下班要坐私人飞机</td>
+            <td>
+            	<a href="javascript:;"  onclick="delRow(this)">删除</a>               
+            </td>
+       </tr>
+</table>
+</body>
+</html>
+<script>
+
+    
+	function delRow(obj, removeRow) {				//删除评论
+		var tr = this.getRowObj(obj);
+		if (tr != null) {
+			tr.parentNode.removeChild(tr);
+			alert(removeRow + "----removeRow");
+			//$("#p_" + removeRow).show();
+			//$("#p1_" + removeRow).show();
+		} else {
+			throw new Error("the given object is not contained by the table");
+		}
+	}
+	function getRowObj(obj) {
+		var i = 0;
+		while (obj.tagName.toLowerCase() != "tr") {
+			obj = obj.parentNode;
+			if (obj.tagName.toLowerCase() == "table")
+				return null;
+		}
+		return obj;
+	}
+</script>

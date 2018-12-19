@@ -30,14 +30,13 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div>
       <div>
-        <img src="/src/assets/img/dz1.png" alt="点赞" width="24" height="24">
+        <div>
+          <img src="/src/assets/img/dz1.png" alt="点赞" width="24" height="24">
+        </div>
+        <el-input v-model="input" placeholder="我要对图片进行评论"></el-input>
+        <el-button type="primary" style="margin-top:10px; float:right" @click="sendComment();">发表</el-button>
       </div>
-      <el-input v-model="input" placeholder="我要对图片进行评论"></el-input>
-      <el-button type="primary" style="margin-top:10px; float:right" @click="sendComment();">发表</el-button>
     </div>
   </div>
 </template>
@@ -119,7 +118,7 @@ export default {
 }
 .photo_info {
   background-color: white;
-  height: 40vh;
+  /* height: 40vh; */
   width: 100%;
 }
 .belong_album {

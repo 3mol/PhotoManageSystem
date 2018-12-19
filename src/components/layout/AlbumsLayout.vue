@@ -6,13 +6,13 @@
       <div class="title_border">
         <i class="el-icon-caret-right"></i>
         <span style="font-size:24px;">Albums</span>
-          <div v-for="album in allAlbums" :key="album.albumId">
-            <AlbumCard @click="setShowAlbum();setPopAlbumId(album.albumId)" v-bind:album="album"></AlbumCard>
-          </div>
+        <div v-for="album in allAlbums" :key="album.albumId">
+          <AlbumCard @click="setShowAlbum();setPopAlbumId(album.albumId)" v-bind:album="album"></AlbumCard>
+        </div>
       </div>
 
       <div class="mgt30" style="text-align: center">
-        <el-button round style="padding:10px 100px;">查看更多</el-button>
+        <el-button round style="padding:10px 100px;" @click="addPageAlbums()">查看更多</el-button>
       </div>
     </div>
 
@@ -42,14 +42,21 @@ export default {
   methods: {
     getAllAlbums() {
       return this.$store.dispatch("getAllAlbums");
+    },
+    addPageAlbums() {
+      return this.$store.dispatch("addPageAlbums", {
+        pageCount: this.pageCount,
+        page: this.page++
+      });
     }
   },
   mounted() {
-    this.getAllAlbums();
+    this.addPageAlbums();
   },
   data() {
     return {
-      // todo 获取这个相册的photos
+      pageCount: 1,
+      page: 1
     };
   }
 };

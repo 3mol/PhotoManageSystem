@@ -27,7 +27,7 @@
         </el-col>
       </el-row>
       <div class="mgt30" style="text-align: center">
-        <el-button round style="padding:10px 100px;" @click="getPhotos()">查看更多</el-button>
+        <el-button round style="padding:10px 100px;" @click="addPagePhotos()">查看更多</el-button>
       </div>
     </div>
     <div>
@@ -85,7 +85,10 @@ import NullLayout from "./NullLayout.vue";
 
 export default {
   data() {
-    return {};
+    return {
+      pageCount: 12,
+      page: 1
+    };
   },
   components: {
     ImageCard,
@@ -94,7 +97,7 @@ export default {
     NullLayout
   },
   mounted() {
-    this.getAllPhotos();
+    this.addPagePhotos();
   },
   computed: mapGetters([
     // 需要用的数据
@@ -107,6 +110,12 @@ export default {
   methods: {
     setPopPhotos(val) {
       return this.$store.dispatch("setPopPhotos", val);
+    },
+    addPagePhotos() {
+      return this.$store.dispatch("addPagePhotos", {
+        pageCount: this.pageCount,
+        page: this.page++
+      });
     },
     setShowPhoto(val) {
       return this.$store.dispatch("setShowPhoto", val);

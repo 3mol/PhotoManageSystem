@@ -135,7 +135,7 @@ const actions = {
 			.get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
 			.then(successCallback, errorCallback);
 	},
-	getAllPhotos({ commit }) {
+	getPagePhotos({ commit }) {
 		var successCallback = response => {
 			console.log("服务器请求成功了getPhotos");
 			commit(
@@ -147,7 +147,39 @@ const actions = {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/photo")
+			.get("http://127.0.0.1:8080/photo/"+pageSize+"/"+pageCount)
+			.then(successCallback, errorCallback);
+
+	},
+	addPagePhotos({ commit },{pageCount,page}) {
+		var successCallback = response => {
+			console.log("服务器请求成功了getPhotos");
+			commit(
+				"addPagePhotos",
+				response.data.data
+			);
+		};
+		var errorCallback = response => {
+			console.log("服务器请求出错了");
+		};
+		Vue.http
+			.get("http://127.0.0.1:8080/photo/"+pageCount+"/"+page)
+			.then(successCallback, errorCallback);
+
+	},
+	addPageAlbums({ commit },{pageCount,page}) {
+		var successCallback = response => {
+			console.log("服务器请求成功了getPhotos");
+			commit(
+				"addPageAlbums",
+				response.data.data
+			);
+		};
+		var errorCallback = response => {
+			console.log("服务器请求出错了");
+		};
+		Vue.http
+			.get("http://127.0.0.1:8080/Album/"+pageCount+"/"+page)
 			.then(successCallback, errorCallback);
 
 	},
@@ -188,7 +220,7 @@ const actions = {
 			.then(successCallback, errorCallback);
 
 	},
-	getAllAlbums({ commit }) {
+	getPageAlbums({ commit }) {
 		var successCallback = response => {
 			console.log("服务器请求成功了 getAllAlbums");
 			// todo 获取最新的评论
@@ -201,7 +233,7 @@ const actions = {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/Album")
+			.get("http://127.0.0.1:8080/Album/1/1")
 			.then(successCallback, errorCallback);
 
 	},
@@ -242,6 +274,14 @@ const mutations = {
 		console.log("设置图片索引对象", val);
 		state.popPhotos = val.photos;
 		state.popPhotoIndex = val.index;
+	},
+	addPagePhotos(state,val){
+		console.log("添加到 photos", val);
+		state.allPhotos = state.allPhotos.concat(val);
+	},
+	addPageAlbums(state,val){
+		console.log("添加到 allAlbums", val);
+		state.allAlbums = state.allAlbums.concat(val);
 	},
 	incPopPhotoIndex(state) {
 		if (state.popPhotoIndex + 1 > state.popPhotos.length - 1) { state.popPhotoIndex = 0 }

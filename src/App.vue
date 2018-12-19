@@ -38,8 +38,8 @@ export default {
     // 需要动用的外部方法
     "setShowPhoto",
     "setShowAlbum",
-    "getAllPhotos",
-    "getAllAlbums"
+    "getPagePhotos",
+    "getPageAlbums"
   ]),
   components: {
     Nav,
@@ -51,9 +51,9 @@ export default {
     $route(to, from) {
       console.log("当前的路由信息：", to);
       if (to.path == "/albums") {
-        this.getAllAlbums();
+        this.getPageAlbums({});
       } else if (to.path == "/photos") {
-        this.getAllPhotos();
+        this.getPagePhotos({});
       }
       // /searchPhotos/:keyWord
       // /searchAlbums/:keyWord

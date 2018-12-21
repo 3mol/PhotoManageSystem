@@ -6,8 +6,8 @@
     <div style="margin:50px;border:1px #c0c0c0 solid;height: 75vh;background: #fff;padding: 40px;">
       <div>
         <i class="el-icon-close btn_close" @click="setShowAlbum"></i>
-        <h3>相册名字</h3>
-        <h5 style="color:#8e8e8e;">{{allAlbums[]}}</h5>
+        <h3>{{popPhotoAlbumInfo.albumName}}</h3>
+        <h5 style="color:#8e8e8e;">{{this.$covertDate(popPhotoAlbumInfo.albumCreatetime)}}</h5>
       </div>
       <hr>
       <div
@@ -70,6 +70,7 @@ export default {
     "showAlbum",
     "popAlbumId",
     "allAlbums",
+    "popPhotoAlbumInfo"
   ]),
   methods: {
     setShowPhoto(val) {
@@ -132,36 +133,36 @@ export default {
         .get("http://127.0.0.1:8080/photo")
         .then(successCallback, errorCallback);
     },
-    crtTimeFtt: function(value, row, index) {
-      var crtTime = new Date(value);
-      return this.dateFtt("yyyy-MM-dd hh:mm:ss", crtTime); //直接调用公共JS里面的时间类处理的办法
-    },
-    dateFtt: function(fmt, date) {
-      //author: meizz
-      var o = {
-        "M+": date.getMonth() + 1, //月份
-        "d+": date.getDate(), //日
-        "h+": date.getHours(), //小时
-        "m+": date.getMinutes(), //分
-        "s+": date.getSeconds(), //秒
-        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
-        S: date.getMilliseconds() //毫秒
-      };
-      if (/(y+)/.test(fmt))
-        fmt = fmt.replace(
-          RegExp.$1,
-          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
-        );
-      for (var k in o)
-        if (new RegExp("(" + k + ")").test(fmt))
-          fmt = fmt.replace(
-            RegExp.$1,
-            RegExp.$1.length == 1
-              ? o[k]
-              : ("00" + o[k]).substr(("" + o[k]).length)
-          );
-      return fmt;
-    }
+    // covertDate: function(value) {
+    //   var date = new Date(value);
+    //   var fmt = "yyyy-MM-dd hh:mm:ss";
+
+    //   var o = {
+    //     "M+": date.getMonth() + 1, //月份
+    //     "d+": date.getDate(), //日
+    //     "h+": date.getHours(), //小时
+    //     "m+": date.getMinutes(), //分
+    //     "s+": date.getSeconds(), //秒
+    //     "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+    //     S: date.getMilliseconds() //毫秒
+    //   };
+    //   if (/(y+)/.test(fmt))
+    //     fmt = fmt.replace(
+    //       RegExp.$1,
+    //       (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+    //     );
+    //   for (var k in o)
+    //     if (new RegExp("(" + k + ")").test(fmt))
+    //       fmt = fmt.replace(
+    //         RegExp.$1,
+    //         RegExp.$1.length == 1
+    //           ? o[k]
+    //           : ("00" + o[k]).substr(("" + o[k]).length)
+    //       );
+    //   return fmt;
+    //   // return this.dateFtt(fmt, date); //直接调用公共JS里面的时间类处理的办法
+    // },
+   
   },
   watch: {
     popAlbumId: function(popAlbumId) {

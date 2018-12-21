@@ -9,6 +9,8 @@ Vue.use(Vuex);
 //定义属性（数据）
 var state = {
 	// 首页图片和搜索图片信息
+	photosPage: 1,
+	AlbumsPage: 1,
 	allPhotos: [],
 	allAlbums: [],
 	showAlbum: false,
@@ -70,7 +72,14 @@ var getters = {
 	},
 	allAlbums(state) {
 		return state.allAlbums;
+	},
+	albumsPage(state) {
+		return state.albumsPage;
+	},
+	photosPage(state) {
+		return state.photosPage;
 	}
+
 }
 
 //定义actions，要执行的操作，如流程判断、异步请求等
@@ -135,9 +144,11 @@ const actions = {
 			.get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
 			.then(successCallback, errorCallback);
 	},
-	getPagePhotos({ commit }, { pageCount, page }) {
+	getPagePhotos({ commit }, { pageCount }) {
 		var successCallback = response => {
 			console.log("服务器请求成功了 getPagePhotos");
+			console.log("设置分页为1");
+			this.state.photosPage = 1;
 			commit(
 				"setAllPhotos",
 				response.data.data
@@ -147,7 +158,7 @@ const actions = {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/photo/" + pageCount + "/" + page)
+			.get("http://127.0.0.1:8080/photo/" + pageCount + "/" + 1)
 			.then(successCallback, errorCallback);
 
 	},
@@ -173,7 +184,7 @@ const actions = {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/photo/" + pageCount + "/" + page)
+			.get("http://127.0.0.1:8080/photo/" + pageCount + "/" + (++this.state.photosPage))
 			.then(successCallback, errorCallback);
 
 	},
@@ -198,7 +209,7 @@ const actions = {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/Album/" + pageCount + "/" + page)
+			.get("http://127.0.0.1:8080/Album/" + pageCount + "/" + (++this.state.albumsPage))
 			.then(successCallback, errorCallback);
 
 	},
@@ -243,6 +254,7 @@ const actions = {
 		var successCallback = response => {
 			console.log("服务器请求成功了 getPageAlbums");
 			// todo 获取最新的评论
+			this.state.albumsPage = 1;
 			commit(
 				"setAllAlbums",
 				response.data.data
@@ -252,7 +264,7 @@ const actions = {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/Album/" + pageCount + "/" + page)
+			.get("http://127.0.0.1:8080/Album/" + pageCount + "/" + 1)
 			.then(successCallback, errorCallback);
 
 	},

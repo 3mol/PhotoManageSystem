@@ -16,8 +16,7 @@
       </div>
     </div>
 
-    <NullLayout v-if="allAlbums.length==0"
-    :isNULL="allAlbums.length==0" ></NullLayout>
+    <NullLayout v-if="allAlbums.length==0" :isNULL="allAlbums.length==0"></NullLayout>
   </div>
 </template>
  
@@ -46,18 +45,21 @@ export default {
     },
     addPageAlbums() {
       return this.$store.dispatch("addPageAlbums", {
-        pageCount: this.pageCount,
-        page: this.page++
+        pageCount: this.pageCount
+      });
+    },
+    getPageAlbums() {
+      return this.$store.dispatch("getPageAlbums", {
+        pageCount: this.pageCount
       });
     }
   },
   mounted() {
-    this.addPageAlbums();
+    this.getPageAlbums();
   },
   data() {
     return {
-      pageCount: 4,
-      page: 1
+      pageCount: 4
     };
   }
 };

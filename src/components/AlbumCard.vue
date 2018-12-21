@@ -4,9 +4,9 @@
     <div style="float:left;margin-left:20px">
       <div
         class="album_name"
-        @click="setShowAlbum();setPopAlbumId(album.albumId)"
+        @click="setShowAlbum();setPopAlbumId(album.albumId);getPopPhotoAlbumInfo(album.albumId);"
       >- {{album.albumName}}</div>
-      <div class="album_time">{{album.albumCreatetime}}</div>
+      <div class="album_time">{{this.$covertDate(album.albumCreatetime)}}</div>
       <div class="album_desc">{{album.albumDesc}}</div>
     </div>
     <div style="clear:both"></div>

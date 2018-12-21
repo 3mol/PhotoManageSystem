@@ -32,7 +32,7 @@
     </div>
     <div>
       <PopPhotoLayout></PopPhotoLayout>
-      <NullLayout v-if="allPhotos.length==0" :isNULL="allPhotos.length==0"  ></NullLayout>
+      <NullLayout v-if="allPhotos.length==0" :isNULL="allPhotos.length==0"></NullLayout>
     </div>
     <!-- <div>
       <NullLayout v-show="allPhotos.length==0"></NullLayout>
@@ -86,8 +86,7 @@ import NullLayout from "./NullLayout.vue";
 export default {
   data() {
     return {
-      pageCount: 12,
-      page: 1
+      pageCount: 12
     };
   },
   components: {
@@ -97,7 +96,7 @@ export default {
     NullLayout
   },
   mounted() {
-    this.addPagePhotos();
+    this.getPagePhotos();
   },
   computed: mapGetters([
     // 需要用的数据
@@ -114,7 +113,11 @@ export default {
     addPagePhotos() {
       return this.$store.dispatch("addPagePhotos", {
         pageCount: this.pageCount,
-        page: this.page++
+      });
+    },
+    getPagePhotos() {
+      return this.$store.dispatch("getPagePhotos", {
+        pageCount: this.pageCount,
       });
     },
     setShowPhoto(val) {

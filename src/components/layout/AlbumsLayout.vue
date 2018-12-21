@@ -16,7 +16,8 @@
       </div>
     </div>
 
-    <NullLayout v-if="allAlbums.length==0"></NullLayout>
+    <NullLayout v-if="allAlbums.length==0"
+    :isNULL="allAlbums.length==0" ></NullLayout>
   </div>
 </template>
  
@@ -55,7 +56,7 @@ export default {
   },
   data() {
     return {
-      pageCount: 1,
+      pageCount: 4,
       page: 1
     };
   }

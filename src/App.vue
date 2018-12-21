@@ -45,15 +45,15 @@ export default {
     Nav,
     Search,
     Classify,
-    Footer,
+    Footer
   },
   watch: {
     $route(to, from) {
       console.log("当前的路由信息：", to);
       if (to.path == "/albums") {
-        this.getPageAlbums({});
+        this.getPageAlbums({ pageCount: 4, page: 1 });
       } else if (to.path == "/photos") {
-        this.getPagePhotos({});
+        this.getPagePhotos({ pageCount: 12, page: 1 });
       }
       // /searchPhotos/:keyWord
       // /searchAlbums/:keyWord

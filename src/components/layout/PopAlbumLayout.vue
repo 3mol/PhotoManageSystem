@@ -7,7 +7,7 @@
       <div>
         <i class="el-icon-close btn_close" @click="setShowAlbum"></i>
         <h3>相册名字</h3>
-        <h5 style="color:#8e8e8e;">2018年12月4日</h5>
+        <h5 style="color:#8e8e8e;">{{allAlbums[]}}</h5>
       </div>
       <hr>
       <div
@@ -17,22 +17,22 @@
           <el-col
             :xs="12"
             :sm="12"
-            :md="6"
-            :lg="6"
-            :xl="6"
+            :md="4"
+            :lg="4"
+            :xl="4"
             v-for="(item,index) in photos"
             :key="item.photoId"
           >
-          <div
-           @click="
+            <div
+              @click="
           setShowPhoto();
           setComments(item.photoId);
           setPopPhotoAlbumInfo(item.albumId);
           setPopPhotos({photos,index});
           "
-          >
-            <ImageCard v-bind:photo="item" ></ImageCard>
-          </div>
+            >
+              <ImageCard v-bind:photo="item"></ImageCard>
+            </div>
           </el-col>
         </el-row>
       </div>
@@ -58,68 +58,8 @@ export default {
           albumName: "sad",
           photoURL:
             "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3819531008,942434957&fm=200&gp=0.jpg"
-        },
-        {
-          photoId: 2,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月12日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1059770508,159053842&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 3,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月23日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4134070514,2065750022&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 4,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月22日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 5,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月21日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3257286882,1013914695&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 6,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月2日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1318618513,3987037995&fm=26&gp=0.jpg"
-        },
-        {
-          photoId: 7,
-          photoName: "图片D",
-          photoDesc: 25,
-          photoCreatetime: "2018年12月2日",
-          albumId: 2,
-          albumName: "sad",
-          photoURL:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1162058567,2289747742&fm=26&gp=0.jpg"
         }
-      ],
+      ]
     };
   },
   components: {
@@ -128,7 +68,8 @@ export default {
   computed: mapGetters([
     // 需要用的数据
     "showAlbum",
-    "popAlbumId"
+    "popAlbumId",
+    "allAlbums",
   ]),
   methods: {
     setShowPhoto(val) {
@@ -190,6 +131,36 @@ export default {
       this.$http
         .get("http://127.0.0.1:8080/photo")
         .then(successCallback, errorCallback);
+    },
+    crtTimeFtt: function(value, row, index) {
+      var crtTime = new Date(value);
+      return this.dateFtt("yyyy-MM-dd hh:mm:ss", crtTime); //直接调用公共JS里面的时间类处理的办法
+    },
+    dateFtt: function(fmt, date) {
+      //author: meizz
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds() //毫秒
+      };
+      if (/(y+)/.test(fmt))
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+      return fmt;
     }
   },
   watch: {
@@ -204,7 +175,7 @@ export default {
         console.log("服务器请求出错了");
       };
       this.$http
-        .get("http://127.0.0.1:8080/album/AlbumId?params="+popAlbumId)
+        .get("http://127.0.0.1:8080/album/AlbumId?params=" + popAlbumId)
         .then(successCallback, errorCallback);
     }
   }

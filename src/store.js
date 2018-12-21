@@ -122,7 +122,7 @@ const actions = {
 	getPopPhotoAlbumInfo({ commit, state }, albumId) {
 		// 获取点击图片的相册信息
 		var successCallback = response => {
-			console.log("get服务器请求成功了setPopPhotoAlbumInfo");
+			console.log("服务器请求成功了 getPopPhotoAlbumInfo");
 			commit(
 				"setPopPhotoAlbumInfo",
 				response.data.data[0]
@@ -135,9 +135,9 @@ const actions = {
 			.get("http://127.0.0.1:8080/album/AlbumId?params=" + albumId)
 			.then(successCallback, errorCallback);
 	},
-	getPagePhotos({ commit }) {
+	getPagePhotos({ commit }, { pageCount, page }) {
 		var successCallback = response => {
-			console.log("服务器请求成功了getPhotos");
+			console.log("服务器请求成功了 getPagePhotos");
 			commit(
 				"setAllPhotos",
 				response.data.data
@@ -147,39 +147,58 @@ const actions = {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/photo/"+pageSize+"/"+pageCount)
+			.get("http://127.0.0.1:8080/photo/" + pageCount + "/" + page)
 			.then(successCallback, errorCallback);
 
 	},
-	addPagePhotos({ commit },{pageCount,page}) {
+	addPagePhotos({ commit }, { pageCount, page }) {
 		var successCallback = response => {
-			console.log("服务器请求成功了getPhotos");
-			commit(
-				"addPagePhotos",
-				response.data.data
-			);
+			console.log("服务器请求成功了 addPagePhotos");
+			if (response.data.data.length == 0) {
+				Vue.prototype.$notify({
+					title: '警告',
+					message: '对不起，没有更多数据了.',
+					type: 'warning'
+				});
+			} else {
+				commit(
+					"addPagePhotos",
+					response.data.data
+				);
+			}
+
+
 		};
 		var errorCallback = response => {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/photo/"+pageCount+"/"+page)
+			.get("http://127.0.0.1:8080/photo/" + pageCount + "/" + page)
 			.then(successCallback, errorCallback);
 
 	},
-	addPageAlbums({ commit },{pageCount,page}) {
+	addPageAlbums({ commit }, { pageCount, page }) {
 		var successCallback = response => {
-			console.log("服务器请求成功了getPhotos");
-			commit(
-				"addPageAlbums",
-				response.data.data
-			);
+			console.log("服务器请求成功了 addPageAlbums");
+			if (response.data.data.length == 0) {
+				Vue.prototype.$notify({
+					title: '警告',
+					message: '对不起，没有更多数据了.',
+					type: 'warning'
+				});
+			} else {
+				commit(
+					"addPageAlbums",
+					response.data.data
+				);
+
+			}
 		};
 		var errorCallback = response => {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/Album/"+pageCount+"/"+page)
+			.get("http://127.0.0.1:8080/Album/" + pageCount + "/" + page)
 			.then(successCallback, errorCallback);
 
 	},
@@ -220,9 +239,9 @@ const actions = {
 			.then(successCallback, errorCallback);
 
 	},
-	getPageAlbums({ commit }) {
+	getPageAlbums({ commit }, { pageCount, page }) {
 		var successCallback = response => {
-			console.log("服务器请求成功了 getAllAlbums");
+			console.log("服务器请求成功了 getPageAlbums");
 			// todo 获取最新的评论
 			commit(
 				"setAllAlbums",
@@ -233,7 +252,7 @@ const actions = {
 			console.log("服务器请求出错了");
 		};
 		Vue.http
-			.get("http://127.0.0.1:8080/Album/1/1")
+			.get("http://127.0.0.1:8080/Album/" + pageCount + "/" + page)
 			.then(successCallback, errorCallback);
 
 	},
@@ -241,7 +260,7 @@ const actions = {
 		var successCallback = response => {
 			console.log("服务器请求成功了 sendComment");
 			// 重新获取一次评论
-			this.dispatch('getComments',obj.photoId);
+			this.dispatch('getComments', obj.photoId);
 		};
 		var errorCallback = response => {
 			console.log("服务器请求出错了");
@@ -275,11 +294,11 @@ const mutations = {
 		state.popPhotos = val.photos;
 		state.popPhotoIndex = val.index;
 	},
-	addPagePhotos(state,val){
+	addPagePhotos(state, val) {
 		console.log("添加到 photos", val);
 		state.allPhotos = state.allPhotos.concat(val);
 	},
-	addPageAlbums(state,val){
+	addPageAlbums(state, val) {
 		console.log("添加到 allAlbums", val);
 		state.allAlbums = state.allAlbums.concat(val);
 	},

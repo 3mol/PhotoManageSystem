@@ -1,8 +1,8 @@
 <template>
   <div style="margin-top: 40px;display:flex; justify-content: center;">
-    <div style="width:40%">
+    <div style="width:40%" @keyup.enter="getSearchPhotos">
       <el-input placeholder="请输入内容" v-model="search_content" class="input-with-select">
-        <el-select v-model="select" slot="prepend" placeholder="请选择">
+        <el-select v-model="select" slot="prepend" placeholder="请选择" style="z-index:0">
           <el-option label="图片名" value="photoName"></el-option>
           <el-option label="相册名" value="AlbumName"></el-option>
           <el-option label="相片编号" value="3"></el-option>
@@ -10,7 +10,7 @@
         <el-button
           slot="append"
           class="el-icon-search"
-          @click="getSearchPhotos(search_content);"
+          @click="getSearchPhotos"
         ></el-button>
       </el-input>
     </div>

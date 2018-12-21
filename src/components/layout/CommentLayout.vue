@@ -12,7 +12,7 @@
           </div>
         </div>
       </div>
-      <div class="photo_desc">This thing in future will be a lot.</div>
+      <div class="photo_desc">{{popPhotos[popPhotoIndex].photoDesc}}</div>
       <div class="comments" style="overflow:auto">
         <div class="comment_user_item" v-for="item in comments" :key="item.commentId">
           <div class="user_img">

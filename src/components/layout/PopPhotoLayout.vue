@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div @keyup.enter="incPopPhotoIndex">
     <!-- <transition name="el-zoom-in-top"> -->
     <transition name="el-zoom-in-top">
 
-    <div id="app" class="container" v-show="showPhoto">
+    <div id="app" class="container" v-show="showPhoto" >
       <div style="display: flex; justify-content:center; height:100vh; align-items: center;"
       >
         <img style="height: 70%;" v-bind:src="popPhotos[popPhotoIndex].photoOriginalUrl">
